@@ -146,7 +146,7 @@ function Card({ p, index }: { p: Project; index: number }) {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
           >
-            <Link2 className="h-4 w-4" /> Live Demo
+            <Link2 className="h-4 w-4" /> API HAS AN ISSUE (FIXING...)
           </a>
         </div>
       </div>
