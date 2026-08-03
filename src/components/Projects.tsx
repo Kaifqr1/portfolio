@@ -38,7 +38,7 @@ const projects: Project[] = [
       'Built a web app where users paste a code snippet and get an AI-generated roast, a code-smell rating (1–10), and one concrete improvement tip. Tested the API contract, error states, and prompt-stability manually and via Postman.',
     tools: ['React', 'TypeScript', 'OpenAI API', 'Tailwind', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
-    demo: 'https://code-roast-smell--kaifqr1.replit.app/',
+    demo: 'https://code-roast-smell-code-roast.vercel.app/',
     testingNotes:
       'Tested API rate-limit handling, empty/malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
     accent: 'from-rose-500/15 to-amber-500/10',
