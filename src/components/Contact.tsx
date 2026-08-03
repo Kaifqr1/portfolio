@@ -88,9 +88,6 @@ export function Contact() {
             >
               <Send className="h-4 w-4" /> Send message
             </button>
-            <p className="text-[11px] text-slate-400 dark:text-slate-500">
-              [PLACEHOLDER] Form is front-end only. Connect to a backend (Supabase / Formspree) to receive messages.
-            </p>
           </div>
         </form>
 
