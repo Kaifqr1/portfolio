@@ -30,6 +30,20 @@ const projects: Project[] = [
     accent: 'from-accent-500/15 to-sky-500/10',
   },
   {
+  name: 'Local Business Site Templates',
+  tagline: 'Reusable static site template — built for freelance client demos',
+  problem:
+    'Small local businesses (gyms, tuition centers, salons) rarely have a web presence, and building a custom site from scratch for every client pitch is slow and expensive.',
+  solution:
+    'Built a reusable, mobile-first React + Tailwind template with token-based placeholder content and a CSS-variable theming system, so I can reskin it per business (colors, copy, services) in minutes and use it as a live demo when pitching freelance clients.',
+  tools: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Bolt', 'Vercel', 'Git'],
+  github: 'https://github.com/Kaifqr1/Demo_sites',
+  demo: 'https://demo-sites-flax.vercel.app',
+  testingNotes:
+    'Manually tested responsiveness across breakpoints, verified WhatsApp deep-link behavior, checked the Google Maps embed for load failures, and confirmed the placeholder-token system swaps cleanly across gym/tuition/salon variants without breaking layout.',
+  accent: 'from-emerald-500/15 to-teal-500/10',
+},
+  {
     name: 'Code Roast & Smell Test',
     tagline: 'LLM-powered web app — paste code, get roasted',
     problem:
