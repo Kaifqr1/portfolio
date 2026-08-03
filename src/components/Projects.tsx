@@ -23,8 +23,8 @@ const projects: Project[] = [
     solution:
       'I self-built ShopCraft, an e-commerce app, and then turned it into my primary testing target: designing test cases module-by-module, logging real bugs, and (in progress) automating the happy paths with Cypress.',
     tools: ['HTML/CSS/JS', 'Node.js', 'MongoDB', 'Cypress', 'Postman', 'Jira', 'Git'],
-    github: 'https://github.com/Kaifqr1/shopcraft',
-    demo: 'https://shopcraft.example.com',
+    github: '#',
+    demo: 'https://shop-hub--kaifqr1.replit.app/',
     testingNotes:
       '30+ test cases across 5 modules: Auth, Product Catalog, Cart, Checkout, and Admin. Covered positive paths, boundary values, and negative scenarios (expired session mid-checkout, invalid promo codes, out-of-stock edge cases). Logged 12+ bugs with severity/priority in Jira.',
     accent: 'from-accent-500/15 to-sky-500/10',
@@ -38,7 +38,7 @@ const projects: Project[] = [
       'Built a web app where users paste a code snippet and get an AI-generated roast, a code-smell rating (1–10), and one concrete improvement tip. Tested the API contract, error states, and prompt-stability manually and via Postman.',
     tools: ['React', 'TypeScript', 'OpenAI API', 'Tailwind', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
-    demo: 'https://code-roast.example.com',
+    demo: 'https://code-roast-smell--kaifqr1.replit.app/',
     testingNotes:
       'Tested API rate-limit handling, empty/malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
     accent: 'from-rose-500/15 to-amber-500/10',
