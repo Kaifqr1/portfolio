@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Mail, Linkedin, Github, Send, CheckCircle2, MapPin } from 'lucide-react';
 import { Section, SITE } from '@/data';
+import { supabase } from '@/lib/supabase';
 
 export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
-  const onSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
@@ -18,10 +21,22 @@ export function Contact() {
       setError('Please enter a valid email address.');
       return;
     }
-    // [PLACEHOLDER] Wire to a real backend / Supabase / Formspree when ready.
-    setSent(true);
-    setForm({ name: '', email: '', message: '' });
-    setTimeout(() => setSent(false), 4000);
+    setSending(true);
+    try {
+      const { error: insertError } = await supabase.from('contact_messages').insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+      });
+      if (insertError) throw insertError;
+      setSent(true);
+      setForm({ name: '', email: '', message: '' });
+      setTimeout(() => setSent(false), 4000);
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : 'Something went wrong. Please try again or email me directly.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -84,9 +99,10 @@ export function Contact() {
 
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-accent-600/30 transition-all hover:bg-accent-700 hover:shadow-md"
+              disabled={sending}
+              className="inline-flex items-center gap-2 rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-accent-600/30 transition-all hover:bg-accent-700 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <Send className="h-4 w-4" /> Send message
+              <Send className="h-4 w-4" /> {sending ? 'Sending…' : 'Send message'}
             </button>
           </div>
         </form>
