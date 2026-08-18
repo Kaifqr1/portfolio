@@ -44,6 +44,17 @@ const projects: Project[] = [
   accent: 'from-emerald-500/15 to-teal-500/10',
 },
   {
+  name: 'Local Business Site Templates',
+  tagline: 'Premium React template for service businesses — deployed in minutes',
+  problem: 'Small businesses struggle to get online affordably.',
+  solution: 'Production-ready React + Tailwind template. Customize and deploy in 15 minutes. Basic (₹5-7k) & Premium (₹12-15k) tiers.',
+  tools: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
+  github: 'https://github.com/Kaifqr1/velocity-portfolio',
+  demo: 'https://velocity-portfolio.vercel.app',
+  testingNotes: 'Tested across all breakpoints, form submission, image optimization. <2s load time, 95+ Lighthouse score. Production-ready.',
+  accent: 'from-amber-500/15 to-orange-500/10',
+},
+  {
     name: 'Code Roast & Smell Test',
     tagline: 'LLM-powered web app — paste code, get roasted',
     problem:
