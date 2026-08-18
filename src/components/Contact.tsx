@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Mail, Linkedin, Github, Send, CheckCircle2, MapPin } from 'lucide-react';
 import { Section, SITE } from '@/data';
-import { supabase } from '@/lib/supabase';
+//import { supabase } from '@/lib/supabase';
 
 export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
