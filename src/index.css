@@ -34,6 +34,54 @@ body {
   transform: translateY(0);
 }
 
+/* Depth-on-scroll — lightweight CSS 3D driven by useScrollDepth. */
+main {
+  perspective: 1200px;
+  perspective-origin: center 32vh;
+}
+
+.scroll-depth {
+  --scroll-rotate-x: 0deg;
+  --scroll-rotate-y: 0deg;
+  --scroll-translate-z: 0px;
+  --scroll-shadow-strength: 0.06;
+  transform: translate3d(0, 20px, var(--scroll-translate-z)) rotateX(var(--scroll-rotate-x))
+    rotateY(var(--scroll-rotate-y));
+  transform-style: preserve-3d;
+  box-shadow: 0 20px 42px rgb(15 23 42 / var(--scroll-shadow-strength));
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    border-color 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-depth.reveal.is-visible {
+  transform: translate3d(0, 0, var(--scroll-translate-z)) rotateX(var(--scroll-rotate-x))
+    rotateY(var(--scroll-rotate-y));
+}
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .scroll-depth,
+  .scroll-depth.reveal.is-visible {
+    transform: translateY(0);
+    box-shadow: none;
+    transition: opacity 0.2s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transition: none;
+  }
+}
+
 /* Subtle grid background */
 .bg-grid {
   background-image:

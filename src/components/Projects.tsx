@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Github, Link2, Bug, Wrench, Lightbulb } from 'lucide-react';
+import { ArrowUpRight, ClipboardCheck, Github, Link2, Bug, Wrench, Lightbulb } from 'lucide-react';
 import { Section } from '@/data';
 
 type Project = {
@@ -8,9 +8,11 @@ type Project = {
   problem: string;
   solution: string;
   tools: string[];
-  github: string;
-  demo: string;
+  github?: string;
+  demo?: string;
   demoLabel?: string;
+  caseStudy?: string;
+  caseStudyLabel?: string;
   testingNotes: string;
   accent: string;
 };
@@ -24,8 +26,8 @@ const projects: Project[] = [
     solution:
       'I self-built ShopCraft, an e-commerce app, and then turned it into my primary testing target: designing test cases module-by-module, logging real bugs, and automating the happy paths with Cypress.',
     tools: ['HTML/CSS/JS', 'Node.js', 'MongoDB', 'Cypress', 'Postman', 'Jira', 'Git'],
-    github: '#',
-    demo: 'https://shop-hub--kaifqr1.replit.app/',
+    caseStudy: '#qa-lab',
+    caseStudyLabel: 'QA case study',
     testingNotes:
       '30+ test cases across 5 modules: Auth, Product Catalog, Cart, Checkout, and Admin. Covered positive paths, boundary values, and negative scenarios including an expired session mid-checkout, invalid promo codes, and out-of-stock edge cases. Logged 12+ bugs with severity and priority in Jira.',
     accent: 'from-accent-500/15 to-sky-500/10',
@@ -80,7 +82,7 @@ const projects: Project[] = [
     tools: ['React', 'TypeScript', 'OpenAI API', 'Tailwind', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
     demo: 'https://code-roast-smell-code-roast.vercel.app/',
-    demoLabel: 'API issue — fixing',
+    demoLabel: 'Preview — API work in progress',
     testingNotes:
       'Tested API rate-limit handling, empty and malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
     accent: 'from-rose-500/15 to-amber-500/10',
@@ -91,8 +93,9 @@ function Card({ p, index }: { p: Project; index: number }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <article
-      className="reveal group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:shadow-black/30"
+      className="reveal scroll-depth group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-slate-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
       data-reveal-delay={String(index * 100)}
+      data-scroll-depth={String(0.9 + (index % 2) * 0.12)}
     >
       <div className={`h-1.5 w-full bg-gradient-to-r ${p.accent}`} />
       <div className="flex flex-1 flex-col p-6">
@@ -102,24 +105,37 @@ function Card({ p, index }: { p: Project; index: number }) {
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{p.tagline}</p>
           </div>
           <div className="flex gap-1.5">
-            <a
-              href={p.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${p.name} GitHub`}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
-            >
-              <Github className="h-4 w-4" />
-            </a>
-            <a
-              href={p.demo}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${p.name} live demo`}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
-            >
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {p.github && (
+              <a
+                href={p.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${p.name} GitHub`}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            )}
+            {p.demo && (
+              <a
+                href={p.demo}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${p.name} live demo`}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+              >
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
+            {p.caseStudy && (
+              <a
+                href={p.caseStudy}
+                aria-label={`${p.name} QA case study`}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+              >
+                <ClipboardCheck className="h-4 w-4" />
+              </a>
+            )}
           </div>
         </div>
 
@@ -174,22 +190,34 @@ function Card({ p, index }: { p: Project; index: number }) {
         </div>
 
         <div className="mt-5 flex items-center gap-4 border-t border-slate-100 pt-4 dark:border-slate-800">
-          <a
-            href={p.github}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
-          >
-            <Github className="h-4 w-4" /> Code
-          </a>
-          <a
-            href={p.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
-          >
-            <Link2 className="h-4 w-4" /> {p.demoLabel ?? 'Live Demo'}
-          </a>
+          {p.github && (
+            <a
+              href={p.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
+            >
+              <Github className="h-4 w-4" /> Code
+            </a>
+          )}
+          {p.demo && (
+            <a
+              href={p.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
+            >
+              <Link2 className="h-4 w-4" /> {p.demoLabel ?? 'Live Demo'}
+            </a>
+          )}
+          {p.caseStudy && (
+            <a
+              href={p.caseStudy}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
+            >
+              <ClipboardCheck className="h-4 w-4" /> {p.caseStudyLabel ?? 'Case study'}
+            </a>
+          )}
         </div>
       </div>
     </article>

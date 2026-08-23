@@ -8,11 +8,12 @@ import { QALab } from '@/components/QALab';
 import { BugHunt } from '@/components/BugHunt';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
-import { useDarkMode, useScrollReveal } from '@/hooks';
+import { useDarkMode, useScrollDepth, useScrollReveal } from '@/hooks';
 
 function App() {
   const { dark, toggle } = useDarkMode();
   useScrollReveal();
+  useScrollDepth();
 
   return (
     <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">

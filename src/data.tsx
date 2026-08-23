@@ -45,7 +45,7 @@ export function Section({
     <section id={id} className={`scroll-mt-24 px-6 ${className}`}>
       <div className="mx-auto max-w-5xl">
         {(eyebrow || title || description) && (
-          <div className="reveal mb-12 max-w-2xl">
+          <div className="reveal scroll-depth mb-12 max-w-2xl" data-scroll-depth="0.35">
             {eyebrow && (
               <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-600 dark:text-accent-400">
                 <span className="h-px w-6 bg-accent-500/60" />
