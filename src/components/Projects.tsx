@@ -21,6 +21,31 @@ const projects: Project[] = [
     problem:
       'I needed a realistic, full-featured app to practice end-to-end QA on — not a toy demo, but something with auth, cart, checkout, and admin flows worth breaking.',
     solution:
+      'Built an operator-led digital-menu service for local venues. The private administrator workspace manages client venues, menus, food photography, and branded QR table cards; guests receive a fast mobile menu with a private browser-only order list for remembering selections.',
+    tools: [
+    'React',
+    'TypeScript',
+    'Tailwind CSS',
+    'Vite',
+    'Node.js',
+    'Express',
+    'tRPC',
+    'TiDB',
+    'Cloudinary',
+    'Vercel',
+    'Vitest',
+  ],
+    github: 'https://github.com/Kaifqr1/QR_Serve',
+    demo: 'https://qr-serve-three.vercel.app',
+    'Added 37 automated Vitest checks across authentication, authorization, menu validation, guest order-list logic, QR destination decoding, storage safeguards, and local-service messaging. Also verified the live operator sign-in, protected service desk, client venues, menu work, QR table-card workflow, public-menu calls to action, and mobile landing experience on Vercel.',
+  accent: 'from-orange-500/15 to-amber-500/10',
+  },
+{
+    name: 'QRServe',
+    tagline: 'Better table begins with one simple scan',
+    problem:
+      'Independent cafés and restaurants need a simple way to keep table menus current, but a self-service platform can add setup work when staff are already busy serving guests.',
+    solution:
       'I self-built ShopCraft, an e-commerce app, and then turned it into my primary testing target: designing test cases module-by-module, logging real bugs, and (in progress) automating the happy paths with Cypress.',
     tools: ['HTML/CSS/JS', 'Node.js', 'MongoDB', 'Cypress', 'Postman', 'Jira', 'Git'],
     github: '#',
@@ -29,6 +54,7 @@ const projects: Project[] = [
       '30+ test cases across 5 modules: Auth, Product Catalog, Cart, Checkout, and Admin. Covered positive paths, boundary values, and negative scenarios (expired session mid-checkout, invalid promo codes, out-of-stock edge cases). Logged 12+ bugs with severity/priority in Jira.',
     accent: 'from-accent-500/15 to-sky-500/10',
   },
+  
   {
   name: 'Local Business Site Templates',
   tagline: 'Premium React template for service businesses — deployed in minutes',
