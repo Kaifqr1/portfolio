@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Mail, Linkedin, Github, Send, CheckCircle2, MapPin } from 'lucide-react';
 import { Section, SITE } from '@/data';
-//import { supabase } from '@/lib/supabase';
 
 export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -23,12 +22,13 @@ export function Contact() {
     }
     setSending(true);
     try {
-      const { error: insertError } = await supabase.from('contact_messages').insert({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        message: form.message.trim(),
-      });
-      if (insertError) throw insertError;
+      const mailto = new URL(`mailto:${SITE.email}`);
+      mailto.searchParams.set('subject', `Portfolio enquiry from ${form.name.trim()}`);
+      mailto.searchParams.set(
+        'body',
+        `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\n${form.message.trim()}`,
+      );
+      window.location.href = mailto.toString();
       setSent(true);
       setForm({ name: '', email: '', message: '' });
       setTimeout(() => setSent(false), 4000);

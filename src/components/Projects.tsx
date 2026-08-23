@@ -10,6 +10,7 @@ type Project = {
   tools: string[];
   github: string;
   demo: string;
+  demoLabel?: string;
   testingNotes: string;
   accent: string;
 };
@@ -21,51 +22,54 @@ const projects: Project[] = [
     problem:
       'I needed a realistic, full-featured app to practice end-to-end QA on — not a toy demo, but something with auth, cart, checkout, and admin flows worth breaking.',
     solution:
-      'Built an operator-led digital-menu service for local venues. The private administrator workspace manages client venues, menus, food photography, and branded QR table cards; guests receive a fast mobile menu with a private browser-only order list for remembering selections.',
-    tools: [
-    'React',
-    'TypeScript',
-    'Tailwind CSS',
-    'Vite',
-    'Node.js',
-    'Express',
-    'tRPC',
-    'TiDB',
-    'Cloudinary',
-    'Vercel',
-    'Vitest',
-  ],
-    github: 'https://github.com/Kaifqr1/QR_Serve',
-    demo: 'https://qr-serve-three.vercel.app',
-    'Added 37 automated Vitest checks across authentication, authorization, menu validation, guest order-list logic, QR destination decoding, storage safeguards, and local-service messaging. Also verified the live operator sign-in, protected service desk, client venues, menu work, QR table-card workflow, public-menu calls to action, and mobile landing experience on Vercel.',
-  accent: 'from-orange-500/15 to-amber-500/10',
-  },
-{
-    name: 'QRServe',
-    tagline: 'Better table begins with one simple scan',
-    problem:
-      'Independent cafés and restaurants need a simple way to keep table menus current, but a self-service platform can add setup work when staff are already busy serving guests.',
-    solution:
-      'I self-built ShopCraft, an e-commerce app, and then turned it into my primary testing target: designing test cases module-by-module, logging real bugs, and (in progress) automating the happy paths with Cypress.',
+      'I self-built ShopCraft, an e-commerce app, and then turned it into my primary testing target: designing test cases module-by-module, logging real bugs, and automating the happy paths with Cypress.',
     tools: ['HTML/CSS/JS', 'Node.js', 'MongoDB', 'Cypress', 'Postman', 'Jira', 'Git'],
     github: '#',
     demo: 'https://shop-hub--kaifqr1.replit.app/',
     testingNotes:
-      '30+ test cases across 5 modules: Auth, Product Catalog, Cart, Checkout, and Admin. Covered positive paths, boundary values, and negative scenarios (expired session mid-checkout, invalid promo codes, out-of-stock edge cases). Logged 12+ bugs with severity/priority in Jira.',
+      '30+ test cases across 5 modules: Auth, Product Catalog, Cart, Checkout, and Admin. Covered positive paths, boundary values, and negative scenarios including an expired session mid-checkout, invalid promo codes, and out-of-stock edge cases. Logged 12+ bugs with severity and priority in Jira.',
     accent: 'from-accent-500/15 to-sky-500/10',
   },
-  
   {
-  name: 'Local Business Site Templates',
-  tagline: 'Premium React template for service businesses — deployed in minutes',
-  problem: 'Small businesses struggle to get online affordably.',
-  solution: 'Production-ready React + Tailwind template. Customize and deploy in 15 minutes. Basic (₹5-7k) & Premium (₹12-15k) tiers.',
-  tools: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
-  github: 'https://github.com/Kaifqr1/velocity-portfolio',
-  demo: 'https://velocity-portfolio.vercel.app',
-  testingNotes: 'Tested across all breakpoints, form submission, image optimization. <2s load time, 95+ Lighthouse score. Production-ready.',
-  accent: 'from-amber-500/15 to-orange-500/10',
-},
+    name: 'QRServe',
+    tagline: 'Local digital-menu service — setup, QR table cards, and managed updates',
+    problem:
+      'Independent cafés and restaurants need a simple way to keep table menus current, but a self-service platform can add setup work when staff are already busy serving guests.',
+    solution:
+      'Built an operator-led digital-menu service for local venues. The private administrator workspace manages client venues, menus, food photography, and branded QR table cards; guests receive a fast mobile menu with a private browser-only order list for remembering selections.',
+    tools: [
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Vite',
+      'Node.js',
+      'Express',
+      'tRPC',
+      'TiDB',
+      'Cloudinary',
+      'Vercel',
+      'Vitest',
+    ],
+    github: 'https://github.com/Kaifqr1/QR_Serve',
+    demo: 'https://qr-serve-three.vercel.app',
+    demoLabel: 'Live Demo',
+    testingNotes:
+      'Added 37 automated Vitest checks across authentication, authorization, menu validation, guest order-list logic, QR destination decoding, storage safeguards, and local-service messaging. Also verified the live operator sign-in, protected service desk, client venues, menu work, QR table-card workflow, public-menu calls to action, and mobile landing experience on Vercel.',
+    accent: 'from-orange-500/15 to-amber-500/10',
+  },
+  {
+    name: 'Local Business Site Templates',
+    tagline: 'Premium React template for service businesses — deployed in minutes',
+    problem: 'Small businesses struggle to get online affordably.',
+    solution:
+      'Production-ready React and Tailwind template. Customize and deploy in 15 minutes, with Basic (₹5–7k) and Premium (₹12–15k) tiers.',
+    tools: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
+    github: 'https://github.com/Kaifqr1/velocity-portfolio',
+    demo: 'https://velocity-portfolio.vercel.app',
+    testingNotes:
+      'Tested across all breakpoints, form submission, and image optimization. Achieved a sub-two-second load time and a 95+ Lighthouse score; production-ready.',
+    accent: 'from-amber-500/15 to-orange-500/10',
+  },
   {
     name: 'Code Roast & Smell Test',
     tagline: 'LLM-powered web app — paste code, get roasted',
@@ -76,8 +80,9 @@ const projects: Project[] = [
     tools: ['React', 'TypeScript', 'OpenAI API', 'Tailwind', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
     demo: 'https://code-roast-smell-code-roast.vercel.app/',
+    demoLabel: 'API issue — fixing',
     testingNotes:
-      'Tested API rate-limit handling, empty/malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
+      'Tested API rate-limit handling, empty and malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
     accent: 'from-rose-500/15 to-amber-500/10',
   },
 ];
@@ -138,12 +143,12 @@ function Card({ p, index }: { p: Project; index: number }) {
             <Wrench className="h-3.5 w-3.5" /> Tools Used
           </div>
           <div className="flex flex-wrap gap-1.5">
-            {p.tools.map((t) => (
+            {p.tools.map((tool) => (
               <span
-                key={t}
+                key={tool}
                 className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300"
               >
-                {t}
+                {tool}
               </span>
             ))}
           </div>
@@ -160,7 +165,7 @@ function Card({ p, index }: { p: Project; index: number }) {
           </p>
           {p.testingNotes.length > 160 && (
             <button
-              onClick={() => setExpanded((e) => !e)}
+              onClick={() => setExpanded((expandedState) => !expandedState)}
               className="mt-2 text-xs font-semibold text-accent-600 hover:text-accent-700 dark:text-accent-400"
             >
               {expanded ? 'Show less' : 'Show more'}
@@ -183,7 +188,7 @@ function Card({ p, index }: { p: Project; index: number }) {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"
           >
-            <Link2 className="h-4 w-4" /> {p.name === 'Local Business Site Templates' ? 'Live Demo' : 'API HAS AN ISSUE (FIXING...)'}
+            <Link2 className="h-4 w-4" /> {p.demoLabel ?? 'Live Demo'}
           </a>
         </div>
       </div>
@@ -197,11 +202,11 @@ export function Projects() {
       id="projects"
       eyebrow="Featured Projects"
       title="Things I've built — and then tried to break."
-      description="Each project is both a build and a QA exercise. I ship the app, then design test cases, log bugs, and (where it makes sense) automate the regression paths."
+      description="Each project is both a build and a QA exercise. I ship the app, then design test cases, log bugs, and, where it makes sense, automate the regression paths."
     >
       <div className="grid gap-5 lg:grid-cols-2">
-        {projects.map((p, i) => (
-          <Card key={p.name} p={p} index={i} />
+        {projects.map((project, index) => (
+          <Card key={project.name} p={project} index={index} />
         ))}
       </div>
     </Section>
