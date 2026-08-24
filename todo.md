@@ -12,3 +12,4 @@
 - [x] Add a progressive, accessible 3D scroll treatment for the portfolio sections and project cards.
 - [x] Validate the updated links, reduced-motion behavior, mobile layout, and production build.
 - [x] Commit and synchronize the approved interaction update to GitHub.
+- [x] Replace the Code Roast “API work in progress” preview label with its verified Live Demo label and validate the link.

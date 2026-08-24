@@ -82,7 +82,7 @@ const projects: Project[] = [
     tools: ['React', 'TypeScript', 'OpenAI API', 'Tailwind', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
     demo: 'https://code-roast-smell-code-roast.vercel.app/',
-    demoLabel: 'Preview — API work in progress',
+    demoLabel: 'Live Demo',
     testingNotes:
       'Tested API rate-limit handling, empty and malformed input, very large snippets, and prompt-injection-style inputs. Wrote 15+ Postman requests covering success, 4xx, and 5xx paths; verified rating consistency across re-submissions.',
     accent: 'from-rose-500/15 to-amber-500/10',
