@@ -1,32 +1,91 @@
 import { useEffect, useRef, useState } from 'react';
 
-/** Reveal elements as they enter the viewport. */
+/**
+ * Cinematic viewport reveals for the whole portfolio.
+ * Components can opt in with `.reveal`; major blocks are also picked up
+ * automatically so newly rendered content (tabs, menus, etc.) animates too.
+ */
 export function useScrollReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const supportsObserver = 'IntersectionObserver' in window;
+    const observed = new WeakSet<Element>();
+    let observer: IntersectionObserver | null = null;
 
-    if (!('IntersectionObserver' in window) || reducedMotion || els.length === 0) {
-      els.forEach((el) => el.classList.add('is-visible'));
+    const selectors = [
+      '.reveal',
+      'main section > div > *',
+      'main section article',
+      'main section form',
+      'main section table',
+      'main section figure',
+      'main section blockquote',
+      'main section .cinematic-card',
+    ].join(',');
+
+    const prepare = (root: ParentNode = document) => {
+      const candidates = Array.from(root.querySelectorAll<HTMLElement>(selectors));
+      candidates.forEach((el) => {
+        if (el.closest('nav')) return;
+        if (el.classList.contains('scroll-reveal-item') || observed.has(el)) return;
+        el.classList.add('scroll-reveal-item');
+        if (!el.dataset.revealDelay) {
+          const siblings = el.parentElement ? Array.from(el.parentElement.children).indexOf(el) : 0;
+          el.style.setProperty('--reveal-delay', `${Math.min(siblings * 45, 240)}ms`);
+        }
+        if (!supportsObserver || reducedMotion.matches) {
+          el.classList.add('is-visible');
+          return;
+        }
+        observed.add(el);
+        observer?.observe(el);
+      });
+    };
+
+    if (!supportsObserver || reducedMotion.matches) {
+      prepare();
       return;
     }
 
-    const io = new IntersectionObserver(
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const el = entry.target as HTMLElement;
-          const delay = el.dataset.revealDelay;
-          if (delay) el.style.transitionDelay = `${delay}ms`;
           el.classList.add('is-visible');
-          io.unobserve(el);
+          observer?.unobserve(el);
         });
       },
-      { threshold: 0.08, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.06, rootMargin: '0px 0px -7% 0px' },
     );
 
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    prepare();
+
+    const mutationObserver = 'MutationObserver' in window
+      ? new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === Node.ELEMENT_NODE) prepare(node as ParentNode);
+            });
+          });
+        })
+      : null;
+
+    mutationObserver?.observe(document.querySelector('main') ?? document.body, { childList: true, subtree: true });
+
+    const handleReducedMotionChange = () => {
+      if (reducedMotion.matches) {
+        document.querySelectorAll<HTMLElement>('.scroll-reveal-item').forEach((el) => el.classList.add('is-visible'));
+        observer?.disconnect();
+      }
+    };
+    reducedMotion.addEventListener('change', handleReducedMotionChange);
+
+    return () => {
+      mutationObserver?.disconnect();
+      observer?.disconnect();
+      reducedMotion.removeEventListener('change', handleReducedMotionChange);
+    };
   }, []);
 }
 
@@ -94,12 +153,9 @@ export function useScrollDepth() {
       const viewportCenter = viewportTop + window.innerHeight * 0.52;
 
       for (const { element, top, height, depth, direction } of bounds) {
-        // Skip far-away elements so long pages stay cheap to scroll.
         if (top + height < viewportTop - window.innerHeight * 0.35 || top > viewportBottom + window.innerHeight * 0.35) continue;
-
         const distance = Math.max(-1, Math.min(1, (top + height * 0.5 - viewportCenter) / (window.innerHeight * 0.95)));
         const focus = 1 - Math.abs(distance);
-
         element.style.setProperty('--scroll-rotate-x', `${(-distance * 1.35 * depth).toFixed(2)}deg`);
         element.style.setProperty('--scroll-rotate-y', `${(distance * direction * 0.8 * depth).toFixed(2)}deg`);
         element.style.setProperty('--scroll-translate-z', `${(focus * 7 * depth).toFixed(1)}px`);
@@ -111,48 +167,30 @@ export function useScrollDepth() {
     const requestScrollUpdate = () => {
       if (!scrollFrame) scrollFrame = window.requestAnimationFrame(update);
     };
-
-    const handleResize = () => {
-      measure();
-      requestScrollUpdate();
-    };
-
-    const handleReducedMotionChange = () => {
-      clearElementMotion();
-      requestScrollUpdate();
-    };
-
-    const handleDesktopChange = () => {
-      measure();
-      clearElementMotion();
-      requestScrollUpdate();
-    };
+    const handleResize = () => { measure(); requestScrollUpdate(); };
+    const handleReducedMotionChange = () => { clearElementMotion(); requestScrollUpdate(); };
+    const handleDesktopChange = () => { measure(); clearElementMotion(); requestScrollUpdate(); };
 
     const handlePointerMove = (event: PointerEvent) => {
       if (!desktop.matches || reducedMotion.matches) return;
       pointerX = event.clientX;
       pointerY = event.clientY;
-
       if (pointerFrame) return;
       pointerFrame = window.requestAnimationFrame(() => {
         pointerFrame = 0;
         const target = document.elementFromPoint(pointerX, pointerY) as HTMLElement | null;
         const nextCard = target?.closest('.cinematic-card') as HTMLElement | null;
-
         if (activeCard && activeCard !== nextCard) {
           activeCard.style.removeProperty('--pointer-x');
           activeCard.style.removeProperty('--pointer-y');
         }
-
         activeCard = nextCard;
         if (!activeCard) return;
-
         const rect = activeCard.getBoundingClientRect();
         activeCard.style.setProperty('--pointer-x', `${Math.max(0, Math.min(rect.width, pointerX - rect.left))}px`);
         activeCard.style.setProperty('--pointer-y', `${Math.max(0, Math.min(rect.height, pointerY - rect.top))}px`);
       });
     };
-
     const handlePointerLeave = () => {
       if (activeCard) {
         activeCard.style.removeProperty('--pointer-x');
@@ -161,9 +199,7 @@ export function useScrollDepth() {
       activeCard = null;
     };
 
-    const resizeObserver = 'ResizeObserver' in window
-      ? new ResizeObserver(() => handleResize())
-      : null;
+    const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(handleResize) : null;
     if (resizeObserver) resizeObserver.observe(document.body);
 
     measure();
