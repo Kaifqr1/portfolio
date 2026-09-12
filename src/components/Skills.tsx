@@ -8,56 +8,11 @@ type SkillGroup = {
 };
 
 const groups: SkillGroup[] = [
-  {
-    name: 'Manual Testing',
-    icon: 'clipboard',
-    items: [
-      { label: 'Test case design', level: 'core' },
-      { label: 'Bug reporting', level: 'core' },
-      { label: 'STLC', level: 'core' },
-      { label: 'Defect lifecycle', level: 'core' },
-      { label: 'Smoke / Sanity / Regression', level: 'core' },
-      { label: 'Functional & negative testing', level: 'core' },
-    ],
-  },
-  {
-    name: 'API Testing',
-    icon: 'plug',
-    items: [
-      { label: 'Postman', level: 'working' },
-      { label: 'HTTP methods & status codes', level: 'working' },
-      { label: 'Request / response validation', level: 'working' },
-    ],
-  },
-  {
-    name: 'Automation',
-    icon: 'zap',
-    status: 'Learning',
-    items: [
-      { label: 'Selenium', level: 'learning' },
-      { label: 'Automation fundamentals', level: 'learning' },
-    ],
-  },
-  {
-    name: 'QA & Dev Tools',
-    icon: 'wrench',
-    items: [
-      { label: 'Jira', level: 'working' },
-      { label: 'Git / GitHub', level: 'working' },
-      { label: 'Vercel', level: 'working' },
-    ],
-  },
-  {
-    name: 'Frontend Fundamentals',
-    icon: 'code',
-    status: 'Learning',
-    items: [
-      { label: 'HTML', level: 'learning' },
-      { label: 'CSS', level: 'learning' },
-      { label: 'JavaScript', level: 'learning' },
-      { label: 'React / TypeScript exposure', level: 'learning' },
-    ],
-  },
+  { name: 'Manual Testing', icon: 'clipboard', items: [{ label: 'Test case design', level: 'core' }, { label: 'Bug reporting', level: 'core' }, { label: 'STLC', level: 'core' }, { label: 'Defect lifecycle', level: 'core' }, { label: 'Smoke / Sanity / Regression', level: 'core' }, { label: 'Functional & negative testing', level: 'core' }] },
+  { name: 'API Testing', icon: 'plug', items: [{ label: 'Postman', level: 'working' }, { label: 'HTTP methods & status codes', level: 'working' }, { label: 'Request / response validation', level: 'working' }] },
+  { name: 'Automation', icon: 'zap', status: 'Learning', items: [{ label: 'Selenium', level: 'learning' }, { label: 'Automation fundamentals', level: 'learning' }] },
+  { name: 'QA & Dev Tools', icon: 'wrench', items: [{ label: 'Jira', level: 'working' }, { label: 'Git / GitHub', level: 'working' }, { label: 'Vercel', level: 'working' }] },
+  { name: 'Frontend Fundamentals', icon: 'code', status: 'Learning', items: [{ label: 'HTML', level: 'learning' }, { label: 'CSS', level: 'learning' }, { label: 'JavaScript', level: 'learning' }, { label: 'React / TypeScript exposure', level: 'learning' }] },
 ];
 
 const levelStyles: Record<string, string> = {
@@ -84,7 +39,7 @@ export function Skills() {
     >
       <div className="grid gap-4 md:grid-cols-2">
         {groups.map((g, i) => (
-          <div key={g.name} className="reveal rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700" data-reveal-delay={String(i * 70)}>
+          <div key={g.name} className="cinematic-card reveal scroll-depth rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700" data-scroll-depth="0.75" data-reveal-delay={String(i * 70)}>
             <div className="mb-4 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-accent-600 dark:bg-slate-800 dark:text-accent-400">
@@ -101,7 +56,7 @@ export function Skills() {
         ))}
       </div>
 
-      <div className="reveal mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-500">
+      <div className="cinematic-card reveal scroll-depth mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-500" data-scroll-depth="0.55">
         <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-accent-500" /> Core</span>
         <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-sky-500" /> Working</span>
         <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-amber-500" /> Learning</span>
