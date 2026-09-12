@@ -1,3 +1,12 @@
 /* Final mobile hero spacing correction */
 @media (max-width:800px){.editorial-hero{padding-top:58px!important}.hero-meta{top:62px!important}.hero-planet{top:2%!important}.hero-name{top:27%!important}.hero-copy{top:50%!important}}
 @media (max-width:380px){.editorial-hero{padding-top:56px!important}.hero-meta{top:60px!important}.hero-name{top:26%!important}.hero-copy{top:49%!important}}
+
+/* About: remove the portrait/image panel and let the copy use the full section width. */
+.about-section .about-portrait{display:none!important}
+.about-section .about-grid{display:block!important;margin-top:38px!important}
+.about-section .about-text{max-width:900px!important;width:100%!important;margin:0!important;align-self:auto!important}
+@media(max-width:800px){
+  .about-section .about-grid{margin-top:28px!important}
+  .about-section .about-text{max-width:none!important}
+}
