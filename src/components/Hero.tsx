@@ -3,7 +3,7 @@ import { SITE } from '@/data';
 
 export function Hero() {
   return (
-    <section id="home" className="hero-cinematic relative isolate min-h-[92vh] overflow-hidden px-6 pb-24 pt-32 sm:pb-32 sm:pt-40">
+    <section id="home" className="hero-cinematic relative isolate min-h-0 overflow-hidden px-6 pb-14 pt-28 sm:min-h-[auto] sm:pb-16 sm:pt-32 lg:min-h-[92vh] lg:pb-24 lg:pt-40">
       <div className="absolute inset-0 -z-20 bg-grid" />
       <div className="hero-scanline pointer-events-none absolute inset-0 -z-10" />
       <div className="hero-orbit hero-orbit-a" aria-hidden="true" />
@@ -13,9 +13,9 @@ export function Hero() {
       <div className="portfolio-noise pointer-events-none absolute inset-0 -z-10 opacity-30" />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
           <div className="hero-copy">
-            <div className="reveal mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/75 px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/65 dark:text-slate-300">
+            <div className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/75 px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/65 dark:text-slate-300">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -29,14 +29,14 @@ export function Hero() {
             <h1 className="reveal hero-title text-balance max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-7xl lg:text-[5.2rem]" data-reveal-delay="60">
               {SITE.name}
             </h1>
-            <p className="reveal mt-6 max-w-2xl text-xl font-semibold leading-snug tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl" data-reveal-delay="120">
+            <p className="reveal mt-5 max-w-2xl text-xl font-semibold leading-snug tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl" data-reveal-delay="120">
               {SITE.role}
             </p>
-            <p className="reveal mt-5 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg" data-reveal-delay="180">
+            <p className="reveal mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg" data-reveal-delay="180">
               {SITE.valueProp}
             </p>
 
-            <div className="reveal mt-6 flex flex-wrap gap-2" data-reveal-delay="220">
+            <div className="reveal mt-5 flex flex-wrap gap-2" data-reveal-delay="220">
               {['Manual QA', 'API Testing', 'Jira', 'Git / GitHub', 'Selenium — learning'].map((item, index) => (
                 <span key={item} className={`rounded-full border px-3 py-1.5 text-[11px] font-bold ${index === 0 ? 'border-accent-200 bg-accent-50 text-accent-700 dark:border-accent-900/60 dark:bg-accent-950/40 dark:text-accent-300' : 'border-slate-200 bg-white/65 text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-400'}`}>
                   {item}
@@ -44,7 +44,7 @@ export function Hero() {
               ))}
             </div>
 
-            <div className="reveal mt-8 flex flex-wrap items-center gap-3" data-reveal-delay="280">
+            <div className="reveal mt-7 flex flex-wrap items-center gap-3" data-reveal-delay="280">
               <a href={SITE.links.resume} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3.5 text-sm font-bold text-white shadow-xl shadow-slate-900/15 transition-all hover:-translate-y-1 hover:shadow-2xl dark:bg-white dark:text-slate-950">
                 <Download className="h-4 w-4" />
                 View Resume
@@ -55,7 +55,7 @@ export function Hero() {
               </a>
             </div>
 
-            <div className="reveal mt-6 flex flex-wrap gap-5 text-xs font-medium text-slate-500 dark:text-slate-500" data-reveal-delay="320">
+            <div className="reveal mt-5 flex flex-wrap gap-5 text-xs font-medium text-slate-500 dark:text-slate-500" data-reveal-delay="320">
               <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" />{SITE.location}</span>
               <a className="inline-flex items-center gap-1.5 transition-colors hover:text-accent-600 dark:hover:text-accent-400" href={`mailto:${SITE.email}`}><Mail className="h-3.5 w-3.5" />{SITE.email}</a>
             </div>
@@ -110,7 +110,7 @@ export function Hero() {
           </div>
         </div>
 
-        <a href="#about" className="reveal mt-16 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-accent-500 sm:inline-flex" data-reveal-delay="360">
+        <a href="#about" className="reveal mt-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-accent-500 sm:mt-12" data-reveal-delay="360">
           Scroll to explore <ArrowDownRight className="h-3.5 w-3.5 animate-bounce" />
         </a>
       </div>
