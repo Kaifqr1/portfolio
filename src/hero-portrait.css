@@ -31,7 +31,7 @@
 .project-stack{margin-top:28px;gap:22px;}.lab-grid{margin-top:28px !important;gap:24px;}.contact-section h2{margin:22px 0 20px;}.contact-links{margin-top:28px;}
 }
 
-/* Final mobile hero fix — size the name against the actual viewport so no word can be clipped. */
+/* Final mobile hero typography: every name line stays inside the viewport. */
 @media (max-width:800px){
   .editorial-hero{padding-left:16px !important;padding-right:16px !important;overflow:hidden !important;}
   .hero-name{display:block !important;width:100% !important;max-width:none !important;margin-left:0 !important;margin-right:0 !important;overflow:visible !important;}
@@ -40,4 +40,20 @@
 }
 @media (max-width:360px){
   .hero-name h1{font-size:clamp(2.2rem,10.6vw,4.5rem) !important;letter-spacing:-.05em !important;}
+}
+
+/* Mobile hero composition: remove flex space-between gaps and intentionally use the open area around the portrait. */
+@media (max-width:800px){
+  .editorial-hero{display:block !important;min-height:100svh !important;padding-top:96px !important;padding-bottom:34px !important;}
+  .hero-meta{margin:0 0 0 !important;}
+  .hero-name{margin-top:clamp(280px,76vw,390px) !important;}
+  .hero-name p{margin-bottom:14px !important;}
+  .hero-copy{width:min(390px,92%) !important;margin:38px 0 0 auto !important;}
+  .hero-copy p{margin-bottom:18px !important;}
+  .hero-bottom{margin-top:54px !important;padding-bottom:0 !important;}
+}
+@media (max-width:380px){
+  .hero-name{margin-top:clamp(245px,72vw,330px) !important;}
+  .hero-copy{margin-top:32px !important;}
+  .hero-bottom{margin-top:46px !important;}
 }
