@@ -41,14 +41,16 @@ export function QALab() {
     >
       <div className="reveal mb-6 inline-flex rounded-lg border border-slate-200 bg-slate-100/60 p-1 dark:border-slate-800 dark:bg-slate-900/60">
         {(['testcases', 'bugs'] as Tab[]).map((item) => (
-          <button key={item} onClick={() => setTab(item)} className={`rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${tab === item ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-white' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}>
+          <button key={item} type="button" onClick={() => setTab(item)} className={`rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${tab === item ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-white' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}>
             {item === 'testcases' ? 'Test Cases' : 'Bug Reports'}
           </button>
         ))}
       </div>
 
+      {/* Do not put .reveal on tab-switched content. The global reveal observer runs once
+          on mount, so newly mounted tab content would otherwise stay opacity: 0. */}
       {tab === 'testcases' ? (
-        <div className="reveal overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+        <div key="testcases" className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-sm">
               <thead className="border-b border-slate-200 bg-slate-50/60 text-xs uppercase tracking-wider text-slate-500 dark:border-slate-800 dark:bg-slate-800/40 dark:text-slate-400">
@@ -69,7 +71,7 @@ export function QALab() {
           </div>
         </div>
       ) : (
-        <div className="reveal grid gap-4 md:grid-cols-3">
+        <div key="bugs" className="grid gap-4 md:grid-cols-3">
           {bugs.map((b) => (
             <article key={b.id} className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
               <div className="flex items-center justify-between"><span className="font-mono text-xs font-semibold text-accent-600 dark:text-accent-400">{b.id}</span><span className={`rounded-md px-2 py-0.5 text-xs font-semibold ${statusStyles[b.status]}`}>{b.status}</span></div>
