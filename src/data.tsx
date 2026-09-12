@@ -43,18 +43,18 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`scroll-mt-24 px-6 ${className}`}>
+    <section id={id} className={`scroll-mt-28 px-6 ${className}`}>
       <div className="mx-auto max-w-6xl">
         {(eyebrow || title || description) && (
-          <div className="reveal scroll-depth mb-12 max-w-3xl" data-scroll-depth="0.35">
+          <div className="reveal scroll-depth mb-12 max-w-3xl sm:mb-14" data-scroll-depth="0.35">
             {eyebrow && (
-              <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-600 dark:text-accent-400">
-                <span className="h-px w-6 bg-accent-500/60" />
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-200/70 bg-accent-50/70 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-accent-700 dark:border-accent-900/50 dark:bg-accent-950/30 dark:text-accent-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
                 {eyebrow}
               </div>
             )}
-            {title && <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">{title}</h2>}
-            {description && <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>}
+            {title && <h2 className="text-balance text-3xl font-black tracking-[-0.035em] text-slate-950 dark:text-white sm:text-5xl">{title}</h2>}
+            {description && <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg">{description}</p>}
           </div>
         )}
         {children}
