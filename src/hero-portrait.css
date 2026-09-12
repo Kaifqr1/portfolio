@@ -9,3 +9,10 @@
 .hero-copy{z-index:5;}
 @media(max-width:800px){.hero-planet{width:62vw;right:-8%;top:12%;opacity:.9;}.hero-planet .planet-ring{border-width:4px;}.hero-name{margin-top:clamp(28px,12vh,72px)}.hero-name h1{font-size:clamp(3.7rem,15.5vw,7rem)}}
 @media(prefers-reduced-motion:reduce){.hero-planet{animation:none!important}}
+
+/* About section — use Kaif's portrait in the existing editorial card */
+.about-portrait{background-image:linear-gradient(to top,rgba(0,0,0,.76) 0%,rgba(0,0,0,.18) 38%,rgba(0,0,0,0) 68%),url('./assets/kaif-portrait.svg');background-size:cover;background-position:center;}
+.about-portrait:before,.about-portrait .portrait-grid,.about-portrait .portrait-orbit{display:none;}
+.about-portrait strong,.about-portrait span{z-index:2;text-shadow:0 2px 16px rgba(0,0,0,.45);}
+.about-portrait strong{font-weight:900;}
+@media(max-width:800px){.about-portrait{min-height:430px;height:78vw;background-position:center top;}}
