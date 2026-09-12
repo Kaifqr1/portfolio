@@ -31,29 +31,22 @@
 .project-stack{margin-top:28px;gap:22px;}.lab-grid{margin-top:28px !important;gap:24px;}.contact-section h2{margin:22px 0 20px;}.contact-links{margin-top:28px;}
 }
 
-/* Final mobile hero typography: every name line stays inside the viewport. */
+/* Mobile hero: a compact editorial composition that fills the canvas instead of leaving dead space. */
 @media (max-width:800px){
-  .editorial-hero{padding-left:16px !important;padding-right:16px !important;overflow:hidden !important;}
-  .hero-name{display:block !important;width:100% !important;max-width:none !important;margin-left:0 !important;margin-right:0 !important;overflow:visible !important;}
-  .hero-name h1{display:block !important;width:100% !important;max-width:none !important;margin:0 !important;font-size:clamp(2.35rem,11.1vw,5rem) !important;line-height:.86 !important;letter-spacing:-.055em !important;white-space:nowrap !important;overflow:visible !important;transform:none !important;}
-  .hero-name h1 em{letter-spacing:inherit !important;}
-}
-@media (max-width:360px){
-  .hero-name h1{font-size:clamp(2.2rem,10.6vw,4.5rem) !important;letter-spacing:-.05em !important;}
-}
-
-/* Mobile hero composition: remove flex space-between gaps and intentionally use the open area around the portrait. */
-@media (max-width:800px){
-  .editorial-hero{display:block !important;min-height:100svh !important;padding-top:96px !important;padding-bottom:34px !important;}
-  .hero-meta{margin:0 0 0 !important;}
-  .hero-name{margin-top:clamp(280px,76vw,390px) !important;}
-  .hero-name p{margin-bottom:14px !important;}
-  .hero-copy{width:min(390px,92%) !important;margin:38px 0 0 auto !important;}
-  .hero-copy p{margin-bottom:18px !important;}
-  .hero-bottom{margin-top:54px !important;padding-bottom:0 !important;}
+  .editorial-hero{display:block !important;min-height:100svh !important;padding:82px 16px 28px !important;overflow:hidden !important;}
+  .hero-meta{width:100%;margin:0 !important;}
+  .hero-planet{width:74vw;right:-17%;top:9%;opacity:.9;}
+  .hero-name{width:100% !important;max-width:none !important;margin:clamp(330px,58vw,410px) 0 0 !important;}
+  .hero-name p{margin-bottom:12px !important;font-size:8px !important;letter-spacing:.3em !important;}
+  .hero-name h1{width:100% !important;max-width:none !important;margin:0 !important;font-size:clamp(2.95rem,13.5vw,5.8rem) !important;line-height:.82 !important;letter-spacing:-.065em !important;white-space:nowrap !important;}
+  .hero-copy{width:min(390px,94%) !important;margin:32px 0 0 auto !important;}
+  .hero-copy p{font-size:12px !important;line-height:1.55 !important;margin-bottom:16px !important;}
+  .hero-bottom{margin-top:42px !important;padding-bottom:0 !important;}
 }
 @media (max-width:380px){
-  .hero-name{margin-top:clamp(245px,72vw,330px) !important;}
-  .hero-copy{margin-top:32px !important;}
-  .hero-bottom{margin-top:46px !important;}
+  .hero-name{margin-top:clamp(300px,57vw,365px) !important;}
+  .hero-name h1{font-size:clamp(2.75rem,13vw,5.1rem) !important;letter-spacing:-.06em !important;}
+  .hero-copy{margin-top:28px !important;}
+  .hero-bottom{margin-top:38px !important;}
 }
+@media(prefers-reduced-motion:reduce){.hero-planet{animation:none!important}}
