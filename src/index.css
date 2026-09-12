@@ -14,42 +14,42 @@ html {
 body {
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  background: #fff;
+  background: #f8fafc;
 }
 
 .dark body { background: #020617; }
 
-::selection { background: rgb(99 102 241 / 0.2); }
+::selection { background: rgb(99 102 241 / 0.22); }
 
 *:focus-visible {
   outline: 2px solid #6366f1;
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
 main {
-  perspective: 1200px;
-  perspective-origin: center 32vh;
+  perspective: 1400px;
+  perspective-origin: center 30vh;
 }
 
 .scroll-depth {
   --scroll-rotate-x: 0deg;
   --scroll-rotate-y: 0deg;
   --scroll-translate-z: 0px;
-  --scroll-shadow-strength: 0.05;
+  --scroll-shadow-strength: 0.04;
   transform: translate3d(0, 18px, var(--scroll-translate-z)) rotateX(var(--scroll-rotate-x)) rotateY(var(--scroll-rotate-y));
   transform-style: preserve-3d;
-  box-shadow: 0 18px 40px rgb(15 23 42 / var(--scroll-shadow-strength));
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.3s ease;
+  box-shadow: 0 22px 55px rgb(15 23 42 / var(--scroll-shadow-strength));
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s ease-out, box-shadow 0.18s ease-out;
   will-change: opacity, transform;
 }
 
@@ -59,16 +59,35 @@ main {
 
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgb(100 116 139 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(100 116 139 / 0.07) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(to right, rgb(100 116 139 / 0.065) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(100 116 139 / 0.065) 1px, transparent 1px);
+  background-size: 52px 52px;
 }
 
 .dark .bg-grid {
   background-image:
-    linear-gradient(to right, rgb(148 163 184 / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(148 163 184 / 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgb(148 163 184 / 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 184 / 0.055) 1px, transparent 1px);
 }
+
+.portfolio-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+}
+
+.glass-panel {
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(226 232 240 / 0.85);
+  box-shadow: 0 24px 70px rgb(15 23 42 / 0.07);
+  backdrop-filter: blur(18px);
+}
+
+.dark .glass-panel {
+  background: rgb(15 23 42 / 0.62);
+  border-color: rgb(51 65 85 / 0.8);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.24);
+}
+
+.text-balance { text-wrap: balance; }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
