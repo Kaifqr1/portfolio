@@ -23,7 +23,7 @@ const groups: SkillGroup[] = [
     name: 'Automation',
     icon: 'zap',
     status: 'In progress',
-    items: [{ label: 'Cypress', level: 'learning' }],
+    items: [{ label: 'Selenium', level: 'learning' }],
   },
   {
     name: 'API Testing',
@@ -42,10 +42,7 @@ const groups: SkillGroup[] = [
     name: 'Dev-adjacent',
     icon: 'code',
     status: 'Learning',
-    items: [
-      { label: 'HTML / CSS / JS basics', level: 'learning' },
-      { label: 'Flutter / Dart', level: 'learning' },
-    ],
+    items: [{ label: 'HTML / CSS / JS basics', level: 'learning' }],
   },
 ];
 
