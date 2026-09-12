@@ -18,7 +18,7 @@ export function About() {
     >
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {facts.map((f, i) => (
-          <div key={f.label} className="reveal rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-accent-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-accent-700" data-reveal-delay={String(i * 70)}>
+          <div key={f.label} className="cinematic-card reveal scroll-depth rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-accent-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-accent-700" data-scroll-depth="0.7" data-reveal-delay={String(i * 70)}>
             <f.icon className="h-5 w-5 text-accent-600 dark:text-accent-400" />
             <div className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">{f.label}</div>
             <div className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{f.value}</div>
@@ -26,7 +26,7 @@ export function About() {
         ))}
       </div>
 
-      <div className="reveal mt-6 grid gap-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 dark:border-slate-800 dark:bg-slate-900/50 sm:p-7 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div className="cinematic-card reveal scroll-depth mt-6 grid gap-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 dark:border-slate-800 dark:bg-slate-900/50 sm:p-7 lg:grid-cols-[1fr_auto] lg:items-center" data-scroll-depth="0.85">
         <div>
           <p className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
             During my QA internship at <span className="font-semibold text-slate-950 dark:text-white">Bloomzen</span>, I worked with a MEAN-stack URL Shortener and focused on functional, API, and regression flows. I also use personal projects such as QRServe to practise testing against applications I can inspect, change, and retest.
