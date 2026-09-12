@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Menu, X } from 'lucide-react';
 import { SITE } from '@/data';
+import './editorial-motion.css';
 
 const services = [
   ['01', 'Manual QA', 'Requirement checks, test cases, functional testing, regression and usability validation.'],
