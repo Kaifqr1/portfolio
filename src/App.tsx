@@ -4,6 +4,7 @@ import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Menu, X } from 'lucide-
 import { SITE } from '@/data';
 import './editorial-motion.css';
 import './hero-portrait.css';
+import './space-tight.css';
 
 const services = [
   ['01', 'Manual QA', 'Requirement checks, test cases, functional testing, regression and usability validation.'],
