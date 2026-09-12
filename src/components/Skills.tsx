@@ -17,32 +17,46 @@ const groups: SkillGroup[] = [
       { label: 'STLC', level: 'core' },
       { label: 'Defect lifecycle', level: 'core' },
       { label: 'Smoke / Sanity / Regression', level: 'core' },
+      { label: 'Functional & negative testing', level: 'core' },
+    ],
+  },
+  {
+    name: 'API Testing',
+    icon: 'plug',
+    items: [
+      { label: 'Postman', level: 'working' },
+      { label: 'HTTP methods & status codes', level: 'working' },
+      { label: 'Request / response validation', level: 'working' },
     ],
   },
   {
     name: 'Automation',
     icon: 'zap',
-    status: 'In progress',
-    items: [{ label: 'Selenium', level: 'learning' }],
+    status: 'Learning',
+    items: [
+      { label: 'Selenium', level: 'learning' },
+      { label: 'Automation fundamentals', level: 'learning' },
+    ],
   },
   {
-    name: 'API Testing',
-    icon: 'plug',
-    items: [{ label: 'Postman', level: 'working' }],
-  },
-  {
-    name: 'Tools',
+    name: 'QA & Dev Tools',
     icon: 'wrench',
     items: [
       { label: 'Jira', level: 'working' },
       { label: 'Git / GitHub', level: 'working' },
+      { label: 'Vercel', level: 'working' },
     ],
   },
   {
-    name: 'Dev-adjacent',
+    name: 'Frontend Fundamentals',
     icon: 'code',
     status: 'Learning',
-    items: [{ label: 'HTML / CSS / JS basics', level: 'learning' }],
+    items: [
+      { label: 'HTML', level: 'learning' },
+      { label: 'CSS', level: 'learning' },
+      { label: 'JavaScript', level: 'learning' },
+      { label: 'React / TypeScript exposure', level: 'learning' },
+    ],
   },
 ];
 
@@ -64,66 +78,33 @@ export function Skills() {
   return (
     <Section
       id="skills"
-      eyebrow="Skills"
-      title="What I test with, and what I'm learning."
-      description="Grouped by discipline. Core skills are ones I've shipped in real projects; working skills are in active professional use; learning skills are in progress."
+      eyebrow="Skills & Tools"
+      title="A clear view of what I can do today — and what I'm building next."
+      description="I keep skill levels explicit instead of presenting every technology as expert-level. Core skills are established practice, working skills are actively used, and learning skills are in progress."
     >
       <div className="grid gap-4 md:grid-cols-2">
         {groups.map((g, i) => (
-          <div
-            key={g.name}
-            className="reveal rounded-xl border border-slate-200 bg-white p-5 transition-colors hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
-            data-reveal-delay={String(i * 70)}
-          >
-            <div className="mb-4 flex items-center justify-between">
+          <div key={g.name} className="reveal rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700" data-reveal-delay={String(i * 70)}>
+            <div className="mb-4 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-accent-600 dark:bg-slate-800 dark:text-accent-400">
-                  <svg
-                    className="h-4.5 w-4.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d={icons[g.icon]} />
-                  </svg>
+                  <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={icons[g.icon]} /></svg>
                 </span>
-                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
-                  {g.name}
-                </h3>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">{g.name}</h3>
               </div>
-              {g.status && (
-                <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                  {g.status}
-                </span>
-              )}
+              {g.status && <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">{g.status}</span>}
             </div>
             <div className="flex flex-wrap gap-2">
-              {g.items.map((s) => (
-                <span
-                  key={s.label}
-                  className={`rounded-md px-2.5 py-1 text-xs font-medium ${levelStyles[s.level]}`}
-                >
-                  {s.label}
-                </span>
-              ))}
+              {g.items.map((s) => <span key={s.label} className={`rounded-md px-2.5 py-1 text-xs font-medium ${levelStyles[s.level]}`}>{s.label}</span>)}
             </div>
           </div>
         ))}
       </div>
 
       <div className="reveal mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-500">
-        <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded bg-accent-500" /> Core
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded bg-sky-500" /> Working
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded bg-amber-500" /> Learning
-        </span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-accent-500" /> Core</span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-sky-500" /> Working</span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded bg-amber-500" /> Learning</span>
       </div>
     </Section>
   );
