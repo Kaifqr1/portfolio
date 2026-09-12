@@ -18,6 +18,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">
+      <div className="cinematic-progress" aria-hidden="true" />
+      <div className="cinematic-vignette" aria-hidden="true" />
+      <div className="cinematic-orb cinematic-orb-a" aria-hidden="true" />
+      <div className="cinematic-orb cinematic-orb-b" aria-hidden="true" />
+      <div className="cinematic-orb cinematic-orb-c" aria-hidden="true" />
+
       <Nav dark={dark} onToggleDark={toggle} />
       <main>
         <Hero />
