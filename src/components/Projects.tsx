@@ -57,9 +57,9 @@ const projects: Project[] = [
   },
 ];
 
-function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
+function ProjectCard({ project, featured = false, index = 0 }: { project: Project; featured?: boolean; index?: number }) {
   return (
-    <article className={`group relative overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/85 shadow-[0_18px_60px_rgba(15,23,42,0.06)] backdrop-blur transition-all duration-500 hover:-translate-y-1.5 hover:border-accent-200 hover:shadow-[0_28px_80px_rgba(15,23,42,0.11)] dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-black/20 dark:hover:border-accent-900/60 ${featured ? 'lg:col-span-2' : ''}`}>
+    <article className={`cinematic-card reveal scroll-depth group relative overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/85 shadow-[0_18px_60px_rgba(15,23,42,0.06)] backdrop-blur transition-all duration-500 hover:-translate-y-1.5 hover:border-accent-200 hover:shadow-[0_28px_80px_rgba(15,23,42,0.11)] dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-black/20 dark:hover:border-accent-900/60 ${featured ? 'lg:col-span-2' : ''}`} data-scroll-depth={featured ? '1.15' : '0.9'} data-reveal-delay={String(80 + index * 90)}>
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-500 to-transparent opacity-70" />
       <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-accent-500/5 blur-3xl transition-all duration-500 group-hover:bg-accent-500/10" />
 
@@ -122,7 +122,7 @@ export function Projects() {
       description="A focused collection of work showing product thinking, implementation, testing, and quality — without the noise of unfinished demos."
     >
       <div className="grid gap-6 lg:grid-cols-2">
-        {projects.map((project, index) => <ProjectCard key={project.name} project={project} featured={index === 0} />)}
+        {projects.map((project, index) => <ProjectCard key={project.name} project={project} featured={index === 0} index={index} />)}
       </div>
     </Section>
   );
