@@ -31,8 +31,7 @@ export function useScrollReveal() {
 
 /**
  * Drives the cinematic layer: page progress, soft section parallax, floating
- * ambient orbs, and restrained 3D depth. Everything is requestAnimationFrame
- * throttled and automatically respects reduced-motion preferences.
+ * ambient orbs, pointer-reactive cards, and restrained 3D depth.
  */
 export function useScrollDepth() {
   useEffect(() => {
@@ -40,6 +39,7 @@ export function useScrollDepth() {
     const desktop = window.matchMedia('(min-width: 768px)');
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-scroll-depth]'));
     const sections = Array.from(document.querySelectorAll<HTMLElement>('.scene-section'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.cinematic-card'));
     const root = document.documentElement;
     let frame = 0;
 
@@ -108,15 +108,28 @@ export function useScrollDepth() {
       if (!frame) frame = window.requestAnimationFrame(update);
     };
 
+    const handlePointerMove = (event: PointerEvent) => {
+      if (reducedMotion.matches || !desktop.matches) return;
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+        const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+        card.style.setProperty('--pointer-x', `${x}px`);
+        card.style.setProperty('--pointer-y', `${y}px`);
+      });
+    };
+
     update();
     window.addEventListener('scroll', requestUpdate, { passive: true });
     window.addEventListener('resize', requestUpdate);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
     reducedMotion.addEventListener('change', requestUpdate);
     desktop.addEventListener('change', requestUpdate);
 
     return () => {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
+      window.removeEventListener('pointermove', handlePointerMove);
       reducedMotion.removeEventListener('change', requestUpdate);
       desktop.removeEventListener('change', requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
