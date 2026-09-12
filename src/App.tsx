@@ -9,6 +9,7 @@ import { QALab } from '@/components/QALab';
 import { BugHunt } from '@/components/BugHunt';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
+import { Marquee } from '@/components/Marquee';
 import { useDarkMode, useScrollDepth, useScrollReveal } from '@/hooks';
 
 function App() {
@@ -25,15 +26,18 @@ function App() {
       <div className="cinematic-orb cinematic-orb-c" aria-hidden="true" />
 
       <Nav dark={dark} onToggleDark={toggle} />
-      <main>
+      <main className="awwwards-stage">
         <Hero />
+        <Marquee />
         <div className="space-y-24 pb-24 sm:space-y-32 sm:pb-32">
           <About />
           <Skills />
+          <Marquee variant="secondary" />
           <Projects />
           <CaseStudies />
           <QALab />
           <BugHunt />
+          <Marquee />
           <Contact />
         </div>
       </main>
