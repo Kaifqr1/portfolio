@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Mail, Linkedin, Github, Send, CheckCircle2, MapPin } from 'lucide-react';
 import { Section, SITE } from '@/data';
 
@@ -6,38 +6,52 @@ export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
+  const [sending, setSending] = useState(false);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('sent') === '1') {
-      setSent(true);
-      window.history.replaceState({}, document.title, `${window.location.pathname}#contact`);
-      const timer = window.setTimeout(() => setSent(false), 6000);
-      return () => window.clearTimeout(timer);
-    }
-  }, []);
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError('');
+    setSent(false);
+
     const data = new FormData(e.currentTarget);
     const name = String(data.get('name') ?? '').trim();
     const email = String(data.get('email') ?? '').trim();
     const message = String(data.get('message') ?? '').trim();
 
     if (!name || !email || !message) {
-      e.preventDefault();
       setError('Please fill in all fields.');
       return;
     }
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      e.preventDefault();
       setError('Please enter a valid email address.');
       return;
     }
 
-    // Let the browser submit the form directly to FormSubmit. This avoids
-    // mailto URL encoding issues and works reliably on mobile browsers.
-    setForm({ name, email, message });
+    setSending(true);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/kaif.qr1@gmail.com', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+        },
+        body: data,
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.success === false) {
+        throw new Error('Submission failed');
+      }
+
+      setSent(true);
+      setForm({ name: '', email: '', message: '' });
+    } catch {
+      setError('Could not send your message right now. Please email me directly instead.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -50,14 +64,11 @@ export function Contact() {
       <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
         <form
           onSubmit={onSubmit}
-          action="https://formsubmit.co/kaif.qr1@gmail.com"
-          method="POST"
           className="reveal rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900"
         >
           <input type="hidden" name="_subject" value="New portfolio enquiry" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="true" />
-          <input type="hidden" name="_next" value="https://portfolio-2026.vercel.app/?sent=1#contact" />
           <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
           <div className="space-y-4">
@@ -82,8 +93,9 @@ export function Contact() {
               </div>
             )}
 
-            <button type="submit" className="inline-flex items-center gap-2 rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-accent-600/30 transition-all hover:bg-accent-700 hover:shadow-md">
-              <Send className="h-4 w-4" /> Send message
+            <button type="submit" disabled={sending} className="inline-flex items-center gap-2 rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-accent-600/30 transition-all hover:bg-accent-700 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60">
+              <Send className="h-4 w-4" />
+              {sending ? 'Sending…' : 'Send message'}
             </button>
           </div>
         </form>
