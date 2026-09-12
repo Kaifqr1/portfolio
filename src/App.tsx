@@ -25,7 +25,9 @@ function useReveal() {
   useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('is-in');
+      // Keep the existing entrance animation, but remove the state when an
+      // element leaves the viewport so the same transition plays in reverse.
+      entry.target.classList.toggle('is-in', entry.isIntersecting);
     }), { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
     items.forEach(item => observer.observe(item));
     return () => observer.disconnect();
