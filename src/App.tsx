@@ -4,6 +4,7 @@ import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Skills } from '@/components/Skills';
 import { Projects } from '@/components/Projects';
+import { CaseStudies } from '@/components/CaseStudies';
 import { QALab } from '@/components/QALab';
 import { BugHunt } from '@/components/BugHunt';
 import { Contact } from '@/components/Contact';
@@ -24,6 +25,7 @@ function App() {
           <About />
           <Skills />
           <Projects />
+          <CaseStudies />
           <QALab />
           <BugHunt />
           <Contact />
