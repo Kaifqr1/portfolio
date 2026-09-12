@@ -36,22 +36,42 @@ function useReveal() {
 function useScrollMotion() {
   useEffect(() => {
     let raf = 0;
+    let lastY = window.scrollY;
+    let lastTime = performance.now();
+    let velocity = 0;
+
     const update = () => {
       raf = 0;
+      const y = window.scrollY;
+      const now = performance.now();
+      const dt = Math.max(16, now - lastTime);
+      const dy = y - lastY;
+      velocity = velocity * 0.82 + (dy / dt) * 18;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? window.scrollY / max : 0;
-      document.documentElement.style.setProperty('--page-progress', String(progress));
-      document.documentElement.style.setProperty('--planet-scroll', `${Math.min(window.scrollY * -0.08, 90)}px`);
-      document.documentElement.style.setProperty('--hero-lift', `${Math.min(window.scrollY * -0.035, 42)}px`);
-      document.documentElement.style.setProperty('--hero-copy-lift', `${Math.min(window.scrollY * -0.02, 24)}px`);
-      document.documentElement.style.setProperty('--rail-shift', `${Math.min(window.scrollY * 0.12, 90)}px`);
-      document.documentElement.style.setProperty('--rail-y', `${Math.min(window.scrollY * 0.08, 80)}px`);
-      document.documentElement.style.setProperty('--copy-drift', `${Math.min(window.scrollY * -0.05, 45)}px`);
-      document.documentElement.style.setProperty('--name-drift', `${Math.min(window.scrollY * 0.04, 35)}px`);
-      document.documentElement.style.setProperty('--bottom-drift', `${Math.min(window.scrollY * -0.04, 25)}px`);
+      const progress = max > 0 ? y / max : 0;
+      const root = document.documentElement;
+      root.style.setProperty('--page-progress', String(progress));
+      root.style.setProperty('--planet-scroll', `${Math.max(-80, Math.min(80, y * -0.08))}px`);
+      root.style.setProperty('--hero-lift', `${Math.max(-42, Math.min(42, y * -0.035))}px`);
+      root.style.setProperty('--hero-copy-lift', `${Math.max(-24, Math.min(24, y * -0.02))}px`);
+      root.style.setProperty('--hero-scroll', `${Math.max(-70, Math.min(70, y * 0.12))}px`);
+      root.style.setProperty('--copy-scroll', `${Math.max(-48, Math.min(48, y * 0.075))}px`);
+      root.style.setProperty('--meta-scroll', `${Math.max(-28, Math.min(28, y * -0.025))}px`);
+      root.style.setProperty('--rail-shift', `${Math.max(-35, Math.min(35, y * 0.04))}px`);
+      root.style.setProperty('--rail-y', `${Math.max(-25, Math.min(25, y * 0.03))}px`);
+      root.style.setProperty('--copy-drift', `${Math.max(-18, Math.min(18, velocity * 1.8))}px`);
+      root.style.setProperty('--bottom-drift', `${Math.max(-8, Math.min(8, velocity * 0.7))}px`);
+      root.style.setProperty('--name-drift', `${Math.max(-12, Math.min(12, velocity * -1.2))}px`);
+      root.style.setProperty('--hero-stage-shift', `${Math.max(-18, Math.min(18, velocity * 1.1))}px`);
+      root.style.setProperty('--ghost-x', `${Math.max(-18, Math.min(18, velocity * 0.7))}px`);
+      root.style.setProperty('--ghost-y', `${Math.max(-35, Math.min(35, y * -0.045))}px`);
+      lastY = y;
+      lastTime = now;
     };
+
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update(); window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
   }, []);
 }
