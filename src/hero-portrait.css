@@ -31,13 +31,13 @@
 .project-stack{margin-top:28px;gap:22px;}.lab-grid{margin-top:28px !important;gap:24px;}.contact-section h2{margin:22px 0 20px;}.contact-links{margin-top:28px;}
 }
 
-/* Mobile hero title: scale to the actual content width so MOHAMMED never clips. */
-@media(max-width:800px){
-  .editorial-hero{padding-left:18px;padding-right:18px;}
-  .hero-name{width:100%;max-width:100%;margin-left:0;margin-right:0;overflow:visible;}
-  .hero-name h1{font-size:clamp(2.9rem,12vw,5.4rem);line-height:.84;letter-spacing:-.07em;white-space:nowrap;max-width:100%;overflow:visible;}
+/* Final mobile hero fix — size the name against the actual viewport so no word can be clipped. */
+@media (max-width:800px){
+  .editorial-hero{padding-left:16px !important;padding-right:16px !important;overflow:hidden !important;}
+  .hero-name{display:block !important;width:100% !important;max-width:none !important;margin-left:0 !important;margin-right:0 !important;overflow:visible !important;}
+  .hero-name h1{display:block !important;width:100% !important;max-width:none !important;margin:0 !important;font-size:clamp(2.35rem,11.1vw,5rem) !important;line-height:.86 !important;letter-spacing:-.055em !important;white-space:nowrap !important;overflow:visible !important;transform:none !important;}
+  .hero-name h1 em{letter-spacing:inherit !important;}
 }
-@media(max-width:380px){
-  .editorial-hero{padding-left:14px;padding-right:14px;}
-  .hero-name h1{font-size:clamp(2.7rem,11.6vw,4.7rem);letter-spacing:-.065em;}
+@media (max-width:360px){
+  .hero-name h1{font-size:clamp(2.2rem,10.6vw,4.5rem) !important;letter-spacing:-.05em !important;}
 }
