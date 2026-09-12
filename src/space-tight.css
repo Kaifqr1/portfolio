@@ -1,0 +1,78 @@
+/* Global composition pass: remove accidental dead space without flattening the editorial design. */
+main > section{margin:0 !important;}
+.services-section,.projects-section,.lab-section,.contact-section{min-height:0 !important;padding-top:clamp(64px,7vw,100px) !important;padding-bottom:clamp(64px,7vw,100px) !important;}
+.about-section,.case-section{min-height:0 !important;padding-top:clamp(70px,8vw,110px) !important;padding-bottom:clamp(64px,7vw,100px) !important;}
+.quote-section{min-height:0 !important;padding-top:clamp(55px,7vw,90px) !important;padding-bottom:clamp(55px,7vw,90px) !important;}
+.section-title-row{margin:0 !important;}
+.section-intro{margin:20px 0 42px auto !important;}
+.service-row{padding:21px 0 !important;}
+.about-grid{margin-top:48px !important;gap:clamp(40px,6vw,90px) !important;}
+.about-portrait{height:min(570px,52vw) !important;min-height:340px !important;}
+.about-text{align-self:start !important;padding-top:4px;}
+.about-text .lead{margin-bottom:22px !important;}
+.about-text ul{margin-top:16px !important;}
+.project-stack{margin-top:38px !important;gap:52px !important;}
+.project-card{min-height:390px !important;}
+.project-visual{min-height:390px !important;}
+.project-info{padding:clamp(26px,3.5vw,48px) !important;}
+.case-section{align-items:start !important;}
+.case-copy h2{margin-bottom:24px !important;}
+.case-grid{margin-top:4px !important;}
+.case-grid > div{min-height:135px !important;padding:20px 15px !important;}
+.case-grid span{margin-bottom:24px !important;}
+.lab-section{min-height:0 !important;}
+.lab-grid{margin-top:42px !important;gap:clamp(45px,7vw,100px) !important;}
+.quote-section p{margin:0 !important;}
+.contact-section h2{margin:12px 0 18px !important;}
+.contact-intro{margin:0 0 28px !important;}
+.contact-links{margin-top:0 !important;}
+.editorial-footer{padding:26px clamp(20px,7vw,110px) !important;}
+
+@media (min-width:801px){
+  .editorial-hero{padding-top:76px !important;padding-bottom:24px !important;}
+  .hero-meta{top:76px !important;}
+  .hero-planet{top:9% !important;width:min(51vw,650px) !important;}
+  .hero-name{bottom:clamp(92px,10vh,125px) !important;}
+  .hero-copy{bottom:clamp(94px,10vh,128px) !important;}
+  .hero-bottom{bottom:22px !important;}
+  .services-section,.projects-section,.lab-section,.contact-section{padding-top:clamp(68px,7vw,100px) !important;padding-bottom:clamp(68px,7vw,100px) !important;}
+  .about-section,.case-section{padding-top:clamp(74px,7vw,108px) !important;padding-bottom:clamp(68px,7vw,100px) !important;}
+  .quote-section{padding-top:70px !important;padding-bottom:70px !important;}
+}
+
+@media (max-width:800px){
+  .services-section,.projects-section,.lab-section,.contact-section{padding:46px 16px !important;}
+  .about-section,.case-section{padding:50px 16px !important;}
+  .quote-section{padding:44px 16px !important;}
+  .section-intro{margin:16px 0 28px !important;}
+  .service-row{padding:17px 0 !important;}
+  .service-row h3{margin-bottom:4px !important;}
+  .about-grid{margin-top:28px !important;gap:24px !important;}
+  .about-portrait{height:min(430px,105vw) !important;min-height:0 !important;}
+  .about-text{padding-top:0;}
+  .about-text .lead{margin-bottom:18px !important;}
+  .about-text ul{margin-top:14px !important;padding-top:10px !important;}
+  .project-stack{margin-top:24px !important;gap:24px !important;}
+  .project-card{min-height:0 !important;}
+  .project-visual{height:52vw !important;min-height:190px !important;}
+  .project-info{padding:20px !important;}
+  .project-info h3{margin:10px 0 !important;}
+  .case-section{gap:30px !important;}
+  .case-copy h2{margin-bottom:20px !important;}
+  .case-grid{margin-top:0 !important;}
+  .case-grid > div{min-height:120px !important;padding:18px 12px !important;}
+  .case-grid span{margin-bottom:18px !important;}
+  .lab-grid{margin-top:28px !important;gap:26px !important;}
+  .lab-grid h2{margin:0 !important;}
+  .lab-terminal{margin-top:20px !important;padding:18px !important;}
+  .contact-section h2{margin:10px 0 14px !important;}
+  .contact-intro{margin-bottom:22px !important;}
+  .editorial-footer{padding:22px 16px !important;}
+}
+
+@media (max-width:380px){
+  .services-section,.projects-section,.lab-section,.contact-section{padding:42px 14px !important;}
+  .about-section,.case-section{padding:46px 14px !important;}
+  .quote-section{padding:40px 14px !important;}
+  .project-stack{gap:20px !important;}
+}
