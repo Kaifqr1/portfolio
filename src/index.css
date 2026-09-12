@@ -19,6 +19,9 @@ body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-feature-
 .cinematic-orb-b { right: -12rem; top: 48vh; background: rgb(56 189 248); }
 .cinematic-orb-c { left: 30%; top: 82vh; background: rgb(168 85 247); }
 
+/* Every observed block enters smoothly. JS adds this class, so content is never hidden when scripts fail. */
+.scroll-reveal-item { opacity: 0; transform: translate3d(0, 30px, 0) scale(0.985); transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform; }
+.scroll-reveal-item.is-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 .reveal { opacity: 0; transform: translate3d(0, 22px, 0) scale(0.992); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 main { position: relative; z-index: 1; perspective: 1200px; perspective-origin: center 42vh; }
@@ -27,7 +30,7 @@ main { position: relative; z-index: 1; perspective: 1200px; perspective-origin: 
 .scroll-depth.reveal.is-visible { transform: translate3d(0, var(--scroll-lift), var(--scroll-translate-z)) rotateX(var(--scroll-rotate-x)) rotateY(var(--scroll-rotate-y)) scale(var(--scroll-scale)); }
 
 .bg-grid { background-image: linear-gradient(to right, rgb(100 116 139 / 0.065) 1px, transparent 1px), linear-gradient(to bottom, rgb(100 116 139 / 0.065) 1px, transparent 1px); background-size: 52px 52px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 82%); }
-.dark .bg-grid { background-image: linear-gradient(to right, rgb(148 163 184 / 0.055) 1px, transparent 1px), linear-gradient(to bottom, rgb(148 163 184 / 0.055) 1px, transparent 1px); }
+.dark .bg-grid { background-image: linear-gradient(to right, rgb(148 163 184 / 0.055) 1px, transparent 1px), linear-gradient(to bottom, rgb(148 163 184 / 0.055) 1px, transparent 82%); }
 .portfolio-noise { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E"); }
 
 .glass-panel { background: rgb(255 255 255 / 0.68); border: 1px solid rgb(226 232 240 / 0.82); box-shadow: 0 30px 90px rgb(15 23 42 / 0.09); backdrop-filter: blur(20px) saturate(1.15); }
@@ -62,6 +65,7 @@ main { position: relative; z-index: 1; perspective: 1200px; perspective-origin: 
   .cinematic-orb { width: 16rem; height: 16rem; filter: blur(55px); opacity: 0.045; }
   .cinematic-vignette { opacity: 0.12; }
   .scroll-depth, .scroll-depth.reveal.is-visible { transform: none !important; will-change: auto; }
+  .scroll-reveal-item { transform: translate3d(0, 24px, 0) scale(0.99); transition-duration: 0.58s; }
   .hero-orbit-a { width: 28rem; height: 28rem; left: 4%; top: -9rem; animation-duration: 28s; }
   .hero-orbit-b { width: 20rem; height: 20rem; right: -8rem; animation-duration: 22s; }
   .hero-card-glow { animation-duration: 7s; }
@@ -70,6 +74,6 @@ main { position: relative; z-index: 1; perspective: 1200px; perspective-origin: 
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal, .reveal.is-visible, .scroll-depth, .scroll-depth.reveal.is-visible, .cinematic-orb, .cinematic-card, .hero-orbit, .hero-card-glow { opacity: 1; transform: none !important; transition: none; animation: none; }
+  .scroll-reveal-item, .scroll-reveal-item.is-visible, .reveal, .reveal.is-visible, .scroll-depth, .scroll-depth.reveal.is-visible, .cinematic-orb, .cinematic-card, .hero-orbit, .hero-card-glow { opacity: 1; transform: none !important; transition: none; animation: none; }
   .cinematic-progress { transition: none; }
 }
