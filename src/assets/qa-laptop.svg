@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Minimal laptop illustration">
+<defs>
+  <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#202020"/><stop offset="1" stop-color="#070707"/></linearGradient>
+  <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8ff54" stop-opacity=".9"/><stop offset="1" stop-color="#d8ff54" stop-opacity="0"/></linearGradient>
+  <filter id="shadow"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="1200" height="900" fill="#111"/>
+<ellipse cx="600" cy="760" rx="390" ry="42" fill="#000" opacity=".45" filter="url(#shadow)"/>
+<rect x="245" y="150" width="710" height="485" rx="28" fill="#202020" stroke="#777" stroke-width="4"/>
+<rect x="275" y="180" width="650" height="425" rx="12" fill="url(#screen)"/>
+<circle cx="600" cy="168" r="5" fill="#777"/>
+<g opacity=".9"><text x="330" y="245" fill="#aaa" font-family="monospace" font-size="18">QA / ENGINEERING</text><text x="330" y="335" fill="#f4f4ee" font-family="Arial,sans-serif" font-size="72" font-weight="800">BUILD.</text><text x="330" y="405" fill="#d8ff54" font-family="Arial,sans-serif" font-size="72" font-weight="800">TEST.</text><text x="330" y="475" fill="#f4f4ee" font-family="Arial,sans-serif" font-size="72" font-weight="800">SHIP.</text><path d="M700 250 L860 250 L700 560 L540 560 Z" fill="url(#glow)" opacity=".22"/></g>
+<path d="M180 635 H1020 L1100 720 Q1115 740 1080 745 H120 Q85 740 100 720 Z" fill="#bdbdb8" stroke="#777" stroke-width="4"/>
+<path d="M270 660 H930 L970 700 H230 Z" fill="#8e8e89"/>
+<rect x="505" y="665" width="190" height="30" rx="15" fill="#6e6e69"/>
+<path d="M100 720 H1100 L1140 755 Q1150 770 1115 770 H85 Q50 770 60 755 Z" fill="#e4e4dd" stroke="#777" stroke-width="3"/>
+</svg>
