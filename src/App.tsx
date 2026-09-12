@@ -36,42 +36,22 @@ function useReveal() {
 function useScrollMotion() {
   useEffect(() => {
     let raf = 0;
-    let lastY = window.scrollY;
-    let lastTime = performance.now();
-    let velocity = 0;
-
     const update = () => {
       raf = 0;
-      const y = window.scrollY;
-      const now = performance.now();
-      const dt = Math.max(16, now - lastTime);
-      const dy = y - lastY;
-      velocity = velocity * 0.82 + (dy / dt) * 18;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? y / max : 0;
-      const root = document.documentElement;
-      root.style.setProperty('--page-progress', String(progress));
-      root.style.setProperty('--planet-scroll', `${Math.max(-80, Math.min(80, y * -0.08))}px`);
-      root.style.setProperty('--hero-lift', `${Math.max(-42, Math.min(42, y * -0.035))}px`);
-      root.style.setProperty('--hero-copy-lift', `${Math.max(-24, Math.min(24, y * -0.02))}px`);
-      root.style.setProperty('--hero-scroll', `${Math.max(-70, Math.min(70, y * 0.12))}px`);
-      root.style.setProperty('--copy-scroll', `${Math.max(-48, Math.min(48, y * 0.075))}px`);
-      root.style.setProperty('--meta-scroll', `${Math.max(-28, Math.min(28, y * -0.025))}px`);
-      root.style.setProperty('--rail-shift', `${Math.max(-35, Math.min(35, y * 0.04))}px`);
-      root.style.setProperty('--rail-y', `${Math.max(-25, Math.min(25, y * 0.03))}px`);
-      root.style.setProperty('--copy-drift', `${Math.max(-18, Math.min(18, velocity * 1.8))}px`);
-      root.style.setProperty('--bottom-drift', `${Math.max(-8, Math.min(8, velocity * 0.7))}px`);
-      root.style.setProperty('--name-drift', `${Math.max(-12, Math.min(12, velocity * -1.2))}px`);
-      root.style.setProperty('--hero-stage-shift', `${Math.max(-18, Math.min(18, velocity * 1.1))}px`);
-      root.style.setProperty('--ghost-x', `${Math.max(-18, Math.min(18, velocity * 0.7))}px`);
-      root.style.setProperty('--ghost-y', `${Math.max(-35, Math.min(35, y * -0.045))}px`);
-      lastY = y;
-      lastTime = now;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      document.documentElement.style.setProperty('--page-progress', String(progress));
+      document.documentElement.style.setProperty('--planet-scroll', `${Math.min(window.scrollY * -0.08, 90)}px`);
+      document.documentElement.style.setProperty('--hero-lift', `${Math.min(window.scrollY * -0.035, 42)}px`);
+      document.documentElement.style.setProperty('--hero-copy-lift', `${Math.min(window.scrollY * -0.02, 24)}px`);
+      document.documentElement.style.setProperty('--rail-shift', `${Math.min(window.scrollY * 0.12, 90)}px`);
+      document.documentElement.style.setProperty('--rail-y', `${Math.min(window.scrollY * 0.08, 80)}px`);
+      document.documentElement.style.setProperty('--copy-drift', `${Math.min(window.scrollY * -0.05, 45)}px`);
+      document.documentElement.style.setProperty('--name-drift', `${Math.min(window.scrollY * 0.04, 35)}px`);
+      document.documentElement.style.setProperty('--bottom-drift', `${Math.min(window.scrollY * -0.04, 25)}px`);
     };
-
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    update(); window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
   }, []);
 }
@@ -84,6 +64,8 @@ function VisualMark({ accent }: { accent: string }) {
     </div><div className="visual-orbit" /><div className="visual-dot" />
   </div>;
 }
+
+const Char = ({ children, space = false }: { children?: string; space?: boolean }) => <span className={`hero-char${space ? ' hero-space' : ''}`} aria-hidden="true">{space ? '\u00a0' : children}</span>;
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -114,7 +96,14 @@ export default function App() {
       <section id="home" ref={heroRef} className="editorial-hero">
         <div className="hero-planet" aria-hidden="true"><div className="planet-ring" /><div className="planet-core" /><div className="planet-glint" /></div>
         <div className="hero-meta" data-reveal><span>04.0</span><span>QUALITY / NO ASSUMPTIONS</span></div>
-        <div className="hero-name" data-reveal><p>QUALITY, THROUGH EVERY FLOW</p><h1>MOHAMMED<br /><em>KAIF</em><br />QURESHI</h1></div>
+        <div className="hero-name" data-reveal>
+          <p>QUALITY, THROUGH EVERY FLOW</p>
+          <h1>
+            <span className="hero-line"><Char>M</Char><Char>O</Char><Char>H</Char><Char>A</Char><Char>M</Char><Char>M</Char><Char>E</Char><Char>D</Char></span><br />
+            <span className="hero-line"><em><Char>K</Char><Char>A</Char><Char>I</Char><Char>F</Char></em></span><br />
+            <span className="hero-line"><Char>Q</Char><Char>U</Char><Char>R</Char><Char>E</Char><Char>S</Char><Char>H</Char><Char>I</Char></span>
+          </h1>
+        </div>
         <div className="hero-copy" data-reveal><p>I help teams ship dependable digital experiences through thoughtful testing, clear defect reporting and a user-first QA mindset.</p><a href="#projects">EXPLORE WORK <ArrowDownRight /></a></div>
         <div className="hero-bottom"><span>SCROLL TO EXPLORE</span><span>↓</span></div>
       </section>
