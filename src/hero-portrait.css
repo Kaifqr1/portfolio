@@ -6,7 +6,6 @@
 .hero-planet .planet-glint{z-index:3;}
 @keyframes heroPortraitFloat{0%,100%{transform:translate3d(var(--mouse-x,0),var(--mouse-y,0),0) translateY(0) rotate(0deg)}50%{transform:translate3d(var(--mouse-x,0),var(--mouse-y,0),0) translateY(-12px) rotate(.7deg)}}
 .hero-name{z-index:4;}.hero-copy{z-index:5;}
-@media(max-width:800px){.hero-planet{width:58vw;right:-5%;top:11%;opacity:.92}.hero-planet .planet-ring{border-width:4px}.hero-name{margin-top:clamp(24px,10vh,58px)}.hero-name h1{font-size:clamp(3.55rem,15vw,7rem)}}
 @media(prefers-reduced-motion:reduce){.hero-planet{animation:none!important}}
 
 /* About section — laptop replaces the portrait. */
@@ -15,38 +14,119 @@
 .about-portrait strong,.about-portrait span{position:relative;z-index:2;text-shadow:0 2px 16px rgba(0,0,0,.45);}
 .about-portrait strong{font-weight:900;}
 
-/* Tight, deliberate section rhythm — no giant blank viewport gaps. */
+/* Tight, deliberate section rhythm. */
 .services-section,.projects-section,.about-section,.case-section,.lab-section,.contact-section{min-height:0 !important;}
 .services-section,.projects-section,.lab-section,.contact-section{padding-top:clamp(62px,7vw,96px) !important;padding-bottom:clamp(62px,7vw,96px) !important;}
 .about-section,.case-section{padding-top:clamp(82px,8vw,110px) !important;padding-bottom:clamp(62px,7vw,96px) !important;}
 .lab-section .lab-grid{margin-top:38px;}.quote-section{min-height:36vh !important;padding-top:42px !important;padding-bottom:42px !important;}
-@media(max-width:800px){
-.editorial-nav{height:64px;}
-.services-section,.projects-section,.lab-section,.contact-section{padding-top:48px !important;padding-bottom:48px !important;}
-.about-section{padding-top:92px !important;padding-bottom:52px !important;}.case-section{padding-top:58px !important;padding-bottom:58px !important;}
-.quote-section{min-height:34vh !important;padding-top:38px !important;padding-bottom:38px !important;}.section-kicker{margin-bottom:12px;}
-.section-title-row h2,.contact-section h2{font-size:clamp(3.4rem,15vw,6.2rem);}.section-intro{margin-top:18px;margin-bottom:28px;}
-.about-grid{margin-top:30px;gap:28px;}.about-portrait{height:min(560px,118vw) !important;min-height:0 !important;background-position:center !important;}
-.about-text{max-width:none;}.about-text .lead{font-size:clamp(27px,7.6vw,44px);line-height:1.02;margin-bottom:24px;}
-.project-stack{margin-top:28px;gap:22px;}.lab-grid{margin-top:28px !important;gap:24px;}.contact-section h2{margin:22px 0 20px;}.contact-links{margin-top:28px;}
+
+/* =========================================================
+   RESPONSIVE SPACE SYSTEM
+   Use the available viewport instead of leaving artificial gaps.
+   ========================================================= */
+
+/* Desktop / tablet: build the hero as a deliberate editorial grid. */
+@media (min-width:801px){
+  .editorial-hero{
+    min-height:100svh !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr) !important;
+    grid-template-rows:auto 1fr auto !important;
+    column-gap:clamp(28px,5vw,90px) !important;
+    row-gap:18px !important;
+    padding:92px clamp(28px,7vw,110px) 28px !important;
+  }
+  .hero-meta{grid-column:1 / -1;grid-row:1;align-self:start;width:100%;max-width:none !important;}
+  .hero-name{grid-column:1;grid-row:2;align-self:end;margin:0 0 clamp(8px,2vh,24px) !important;max-width:none !important;width:100% !important;}
+  .hero-name h1{font-size:clamp(5.4rem,11.5vw,11.5rem) !important;line-height:.79 !important;}
+  .hero-copy{grid-column:2;grid-row:2;align-self:end;width:100% !important;margin:0 0 clamp(8px,2vh,24px) !important;}
+  .hero-copy p{max-width:390px;margin-left:auto;}
+  .hero-bottom{grid-column:1 / -1;grid-row:3;align-self:end;}
+  .hero-planet{width:min(47vw,610px) !important;right:-6% !important;top:10% !important;}
+
+  .services-section,.projects-section,.lab-section,.contact-section{padding-top:clamp(72px,8vw,120px) !important;padding-bottom:clamp(72px,8vw,120px) !important;}
+  .about-section,.case-section{padding-top:clamp(78px,9vw,130px) !important;padding-bottom:clamp(70px,8vw,115px) !important;}
+  .section-intro{margin-top:24px !important;margin-bottom:48px !important;}
+  .about-grid{margin-top:52px !important;gap:clamp(42px,7vw,110px) !important;}
+  .about-portrait{height:min(590px,52vw) !important;}
+  .project-stack{margin-top:42px !important;gap:44px !important;}
+  .project-card{min-height:430px !important;}
+  .project-visual{min-height:430px !important;}
+  .case-section{gap:clamp(45px,7vw,110px) !important;}
+  .case-copy h2{margin-bottom:26px !important;}
+  .case-grid>div{min-height:145px !important;padding:20px 14px !important;}
+  .lab-grid{margin-top:48px !important;gap:clamp(45px,8vw,120px) !important;}
+  .quote-section{min-height:27vh !important;padding-top:34px !important;padding-bottom:34px !important;}
 }
 
-/* Mobile hero: a compact editorial composition that fills the canvas instead of leaving dead space. */
+/* Mobile: stack content into a controlled vertical composition with no dead zones. */
 @media (max-width:800px){
-  .editorial-hero{display:block !important;min-height:100svh !important;padding:82px 16px 28px !important;overflow:hidden !important;}
-  .hero-meta{width:100%;margin:0 !important;}
-  .hero-planet{width:74vw;right:-17%;top:9%;opacity:.9;}
-  .hero-name{width:100% !important;max-width:none !important;margin:clamp(330px,58vw,410px) 0 0 !important;}
-  .hero-name p{margin-bottom:12px !important;font-size:8px !important;letter-spacing:.3em !important;}
-  .hero-name h1{width:100% !important;max-width:none !important;margin:0 !important;font-size:clamp(2.95rem,13.5vw,5.8rem) !important;line-height:.82 !important;letter-spacing:-.065em !important;white-space:nowrap !important;}
-  .hero-copy{width:min(390px,94%) !important;margin:32px 0 0 auto !important;}
-  .hero-copy p{font-size:12px !important;line-height:1.55 !important;margin-bottom:16px !important;}
-  .hero-bottom{margin-top:42px !important;padding-bottom:0 !important;}
+  .editorial-nav{height:64px;}
+  .editorial-hero{
+    min-height:calc(100svh - 0px) !important;
+    height:calc(100svh - 0px) !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto minmax(0,1fr) auto auto !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:86px 16px 22px !important;
+    overflow:hidden !important;
+  }
+  .hero-meta{grid-column:1;grid-row:1;width:100%;max-width:none !important;margin:0 !important;}
+  .hero-name{
+    grid-column:1;grid-row:2;align-self:center !important;
+    width:100% !important;max-width:none !important;margin:0 !important;
+    overflow:visible !important;
+  }
+  .hero-name p{margin:0 0 12px !important;}
+  .hero-name h1{
+    display:block !important;width:100% !important;max-width:none !important;margin:0 !important;
+    font-size:clamp(2.65rem,12.25vw,5.1rem) !important;
+    line-height:.84 !important;letter-spacing:-.065em !important;
+    white-space:nowrap !important;overflow:visible !important;transform:none !important;
+  }
+  .hero-name h1 em{letter-spacing:inherit !important;}
+  .hero-copy{
+    grid-column:1;grid-row:3;align-self:end !important;
+    width:min(100%,390px) !important;margin:20px 0 0 auto !important;
+  }
+  .hero-copy p{font-size:12.5px !important;line-height:1.55 !important;margin:0 0 16px !important;}
+  .hero-bottom{grid-column:1;grid-row:4;align-self:end !important;width:100%;margin:24px 0 0 !important;}
+  .hero-planet{width:66vw !important;right:-8% !important;top:10% !important;opacity:.92;}
+
+  .services-section,.projects-section,.lab-section,.contact-section{padding:54px 16px !important;}
+  .about-section{padding:64px 16px 54px !important;}
+  .case-section{padding:62px 16px !important;}
+  .section-kicker{margin-bottom:12px !important;}
+  .section-title-row h2,.contact-section h2{font-size:clamp(3.2rem,14.5vw,6rem) !important;}
+  .section-intro{margin:18px 0 30px !important;}
+  .service-row{grid-template-columns:34px 1fr 18px !important;gap:10px !important;padding:20px 0 !important;}
+  .service-row h3{font-size:clamp(23px,7.2vw,34px) !important;}
+  .about-grid{margin-top:32px !important;gap:28px !important;}
+  .about-portrait{height:min(500px,118vw) !important;min-height:0 !important;}
+  .about-text .lead{font-size:clamp(25px,7.5vw,42px) !important;margin-bottom:22px !important;}
+  .project-stack{margin-top:28px !important;gap:28px !important;}
+  .project-card{display:flex !important;flex-direction:column !important;min-height:0 !important;}
+  .project-visual{height:54vw !important;min-height:210px !important;order:1 !important;}
+  .project-info{order:2 !important;padding:24px !important;}
+  .project-info h3{font-size:clamp(38px,11vw,58px) !important;}
+  .case-section{display:block !important;}
+  .case-copy h2{font-size:clamp(3.35rem,14vw,6rem) !important;margin-bottom:24px !important;}
+  .case-grid{margin-top:34px !important;}
+  .case-grid>div{min-height:135px !important;padding:20px 12px !important;}
+  .case-grid span{margin-bottom:24px !important;}
+  .lab-grid{margin-top:30px !important;gap:30px !important;}
+  .lab-grid h2{font-size:clamp(4.6rem,18vw,7rem) !important;}
+  .lab-terminal{margin-top:24px !important;padding:20px !important;}
+  .quote-section{min-height:25vh !important;padding:30px 16px !important;}
+  .contact-section h2{margin:18px 0 !important;}
+  .contact-links{margin-top:26px !important;}
 }
+
 @media (max-width:380px){
-  .hero-name{margin-top:clamp(300px,57vw,365px) !important;}
-  .hero-name h1{font-size:clamp(2.75rem,13vw,5.1rem) !important;letter-spacing:-.06em !important;}
-  .hero-copy{margin-top:28px !important;}
-  .hero-bottom{margin-top:38px !important;}
+  .hero-name h1{font-size:clamp(2.35rem,11.8vw,4.6rem) !important;letter-spacing:-.055em !important;}
+  .hero-copy{margin-top:16px !important;}
+  .hero-bottom{margin-top:18px !important;}
+  .services-section,.projects-section,.lab-section,.contact-section{padding-left:14px !important;padding-right:14px !important;}
 }
-@media(prefers-reduced-motion:reduce){.hero-planet{animation:none!important}}
