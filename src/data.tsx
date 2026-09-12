@@ -12,7 +12,7 @@ export const SITE = {
     github: 'https://github.com/Kaifqr1',
     linkedin: 'https://www.linkedin.com/in/mohammed-kaif-qureshi/',
     resume: '/resume.pdf',
-    postman: 'https://www.postman.com/mkaif-qureshi/workspace/qa-portfolio',
+    postman: 'https://www.postman.com/mkaif-qureshhi/workspace/qa-portfolio',
   },
 };
 
@@ -43,13 +43,13 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`scroll-mt-28 px-6 ${className}`}>
+    <section id={id} className={`scene-section scroll-mt-28 px-6 ${className}`}>
       <div className="mx-auto max-w-6xl">
         {(eyebrow || title || description) && (
-          <div className="reveal scroll-depth mb-12 max-w-3xl sm:mb-14" data-scroll-depth="0.35">
+          <div className="scene-heading reveal scroll-depth mb-12 max-w-3xl sm:mb-14" data-scroll-depth="0.35">
             {eyebrow && (
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-200/70 bg-accent-50/70 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-accent-700 dark:border-accent-900/50 dark:bg-accent-950/30 dark:text-accent-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-200/70 bg-accent-50/70 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-accent-700 shadow-sm backdrop-blur dark:border-accent-900/50 dark:bg-accent-950/30 dark:text-accent-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-500 shadow-[0_0_12px_rgb(99_102_241_/_0.65)]" />
                 {eyebrow}
               </div>
             )}
