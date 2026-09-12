@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-/**
- * Reveal-on-scroll hook. Adds `is-visible` to elements with the `reveal` class
- * when they enter the viewport. One-shot (unobserves after first reveal).
- */
+/** Reveal elements as they enter the viewport. */
 export function useScrollReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
@@ -12,6 +9,7 @@ export function useScrollReveal() {
       els.forEach((el) => el.classList.add('is-visible'));
       return;
     }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -32,48 +30,78 @@ export function useScrollReveal() {
 }
 
 /**
- * Adds a restrained depth response to marked content while it moves through the
- * viewport. Desktop-only and disabled for reduced motion so reading remains the
- * priority on small screens and for motion-sensitive visitors.
+ * Drives the cinematic layer: page progress, soft section parallax, floating
+ * ambient orbs, and restrained 3D depth. Everything is requestAnimationFrame
+ * throttled and automatically respects reduced-motion preferences.
  */
 export function useScrollDepth() {
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktop = window.matchMedia('(min-width: 768px)');
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-scroll-depth]'));
-    if (elements.length === 0) return;
-
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.scene-section'));
+    const root = document.documentElement;
     let frame = 0;
+
     const reset = () => {
+      root.style.setProperty('--scroll-progress', '0');
+      root.style.setProperty('--orb-x', '0px');
+      root.style.setProperty('--orb-y', '0px');
       elements.forEach((element) => {
         element.style.removeProperty('--scroll-rotate-x');
         element.style.removeProperty('--scroll-rotate-y');
         element.style.removeProperty('--scroll-translate-z');
+        element.style.removeProperty('--scroll-lift');
+        element.style.removeProperty('--scroll-scale');
         element.style.removeProperty('--scroll-shadow-strength');
       });
+      sections.forEach((section) => section.style.removeProperty('--section-shift'));
     };
 
     const update = () => {
       frame = 0;
-      if (reducedMotion.matches || !desktop.matches) {
+      if (reducedMotion.matches) {
         reset();
         return;
       }
 
-      const viewportCenter = window.innerHeight / 2;
-      elements.forEach((element, index) => {
-        const rect = element.getBoundingClientRect();
-        const elementCenter = rect.top + rect.height / 2;
-        const distance = Math.max(-1, Math.min(1, (elementCenter - viewportCenter) / (window.innerHeight * 0.72)));
-        const focus = 1 - Math.min(1, Math.abs(distance));
-        const depth = Number(element.dataset.scrollDepth ?? '1');
-        const direction = index % 2 === 0 ? 1 : -1;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+      root.style.setProperty('--scroll-progress', progress.toFixed(4));
 
-        element.style.setProperty('--scroll-rotate-x', `${(-distance * 4.5 * depth).toFixed(2)}deg`);
-        element.style.setProperty('--scroll-rotate-y', `${(distance * direction * 2.2 * depth).toFixed(2)}deg`);
-        element.style.setProperty('--scroll-translate-z', `${(focus * 18 * depth).toFixed(1)}px`);
-        element.style.setProperty('--scroll-shadow-strength', `${(0.06 + focus * 0.1).toFixed(2)}`);
-      });
+      if (desktop.matches) {
+        root.style.setProperty('--orb-x', `${(Math.sin(progress * Math.PI * 2) * 34).toFixed(1)}px`);
+        root.style.setProperty('--orb-y', `${(Math.cos(progress * Math.PI * 2) * 22).toFixed(1)}px`);
+
+        const viewportCenter = window.innerHeight / 2;
+        elements.forEach((element, index) => {
+          const rect = element.getBoundingClientRect();
+          const elementCenter = rect.top + rect.height / 2;
+          const distance = Math.max(-1, Math.min(1, (elementCenter - viewportCenter) / (window.innerHeight * 0.78)));
+          const focus = 1 - Math.min(1, Math.abs(distance));
+          const depth = Number(element.dataset.scrollDepth ?? '1');
+          const direction = index % 2 === 0 ? 1 : -1;
+
+          element.style.setProperty('--scroll-rotate-x', `${(-distance * 5.2 * depth).toFixed(2)}deg`);
+          element.style.setProperty('--scroll-rotate-y', `${(distance * direction * 2.8 * depth).toFixed(2)}deg`);
+          element.style.setProperty('--scroll-translate-z', `${(focus * 24 * depth).toFixed(1)}px`);
+          element.style.setProperty('--scroll-lift', `${(-distance * 7 * depth).toFixed(1)}px`);
+          element.style.setProperty('--scroll-scale', `${(0.985 + focus * 0.015).toFixed(4)}`);
+          element.style.setProperty('--scroll-shadow-strength', `${(0.04 + focus * 0.11).toFixed(2)}`);
+        });
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const distance = Math.max(-1, Math.min(1, (rect.top + rect.height / 2 - viewportCenter) / (window.innerHeight * 1.1)));
+          section.style.setProperty('--section-shift', `${(-distance * 70).toFixed(1)}px`);
+        });
+      } else {
+        elements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const distance = Math.max(-1, Math.min(1, (rect.top + rect.height / 2 - window.innerHeight / 2) / (window.innerHeight * 0.9)));
+          element.style.setProperty('--scroll-lift', `${(-distance * 3).toFixed(1)}px`);
+        });
+      }
     };
 
     const requestUpdate = () => {
