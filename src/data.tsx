@@ -21,6 +21,7 @@ export const SECTIONS: { id: string; label: string }[] = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
+  { id: 'case-studies', label: 'Case Studies' },
   { id: 'qa-lab', label: 'QA Lab' },
   { id: 'bug-hunt', label: 'Bug Hunt' },
   { id: 'contact', label: 'Contact' },
@@ -52,16 +53,8 @@ export function Section({
                 {eyebrow}
               </div>
             )}
-            {title && (
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                {title}
-              </h2>
-            )}
-            {description && (
-              <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-                {description}
-              </p>
-            )}
+            {title && <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">{title}</h2>}
+            {description && <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>}
           </div>
         )}
         {children}
