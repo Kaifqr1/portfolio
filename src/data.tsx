@@ -12,7 +12,7 @@ export const SITE = {
     github: 'https://github.com/Kaifqr1',
     linkedin: 'https://www.linkedin.com/in/mohammed-kaif-qureshi/',
     resume: '/resume.pdf',
-    postman: 'https://www.postman.com/mkaif-qureshhi/workspace/qa-portfolio',
+    postman: 'https://www.postman.com/mkaif-qureshi/workspace/qa-portfolio',
   },
 };
 
