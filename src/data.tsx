@@ -2,9 +2,9 @@ import { type ReactNode } from 'react';
 
 export const SITE = {
   name: 'Mohammed Kaif Qureshi',
-  role: 'QA Engineer | Aspiring Frontend Developer',
+  role: 'QA Engineer | Manual & API Testing',
   valueProp:
-    'I break software so users never have to. Manual & API testing today, automation and frontend tomorrow.',
+    'I build, test, and break web experiences with a QA-first mindset — focused on reliable user flows, clear bug reports, API validation, and growing Selenium automation skills.',
   location: 'Mumbai, India',
   email: 'kaif.qr1@gmail.com',
   phone: '7039081439',
@@ -43,9 +43,9 @@ export function Section({
 }) {
   return (
     <section id={id} className={`scroll-mt-24 px-6 ${className}`}>
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         {(eyebrow || title || description) && (
-          <div className="reveal scroll-depth mb-12 max-w-2xl" data-scroll-depth="0.35">
+          <div className="reveal scroll-depth mb-12 max-w-3xl" data-scroll-depth="0.35">
             {eyebrow && (
               <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-600 dark:text-accent-400">
                 <span className="h-px w-6 bg-accent-500/60" />
