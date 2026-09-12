@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Menu, X } from 'lucide-react';
 import { SITE } from '@/data';
 import './editorial-motion.css';
+import './creative-scroll.css';
 import './hero-portrait.css';
 import './space-tight.css';
 
@@ -25,8 +26,6 @@ function useReveal() {
   useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      // Keep the existing entrance animation, but remove the state when an
-      // element leaves the viewport so the same transition plays in reverse.
       entry.target.classList.toggle('is-in', entry.isIntersecting);
     }), { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
     items.forEach(item => observer.observe(item));
@@ -40,7 +39,16 @@ function useScrollMotion() {
     const update = () => {
       raf = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      document.documentElement.style.setProperty('--page-progress', String(max > 0 ? window.scrollY / max : 0));
+      const progress = max > 0 ? window.scrollY / max : 0;
+      document.documentElement.style.setProperty('--page-progress', String(progress));
+      document.documentElement.style.setProperty('--planet-scroll', `${Math.min(window.scrollY * -0.08, 90)}px`);
+      document.documentElement.style.setProperty('--hero-lift', `${Math.min(window.scrollY * -0.035, 42)}px`);
+      document.documentElement.style.setProperty('--hero-copy-lift', `${Math.min(window.scrollY * -0.02, 24)}px`);
+      document.documentElement.style.setProperty('--rail-shift', `${Math.min(window.scrollY * 0.12, 90)}px`);
+      document.documentElement.style.setProperty('--rail-y', `${Math.min(window.scrollY * 0.08, 80)}px`);
+      document.documentElement.style.setProperty('--copy-drift', `${Math.min(window.scrollY * -0.05, 45)}px`);
+      document.documentElement.style.setProperty('--name-drift', `${Math.min(window.scrollY * 0.04, 35)}px`);
+      document.documentElement.style.setProperty('--bottom-drift', `${Math.min(window.scrollY * -0.04, 25)}px`);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     update(); window.addEventListener('scroll', onScroll, { passive: true });
