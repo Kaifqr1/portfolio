@@ -3,15 +3,18 @@ import { SITE } from '@/data';
 
 export function Hero() {
   return (
-    <section id="home" className="relative isolate overflow-hidden px-6 pb-24 pt-32 sm:pb-32 sm:pt-40">
-      <div className="absolute inset-0 -z-20 bg-grid [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_78%)]" />
+    <section id="home" className="hero-cinematic relative isolate min-h-[92vh] overflow-hidden px-6 pb-24 pt-32 sm:pb-32 sm:pt-40">
+      <div className="absolute inset-0 -z-20 bg-grid" />
+      <div className="hero-scanline pointer-events-none absolute inset-0 -z-10" />
+      <div className="hero-orbit hero-orbit-a" aria-hidden="true" />
+      <div className="hero-orbit hero-orbit-b" aria-hidden="true" />
       <div className="absolute left-[18%] top-20 -z-10 h-72 w-72 rounded-full bg-accent-500/15 blur-[110px]" />
       <div className="absolute right-[8%] top-40 -z-10 h-64 w-64 rounded-full bg-sky-400/10 blur-[100px]" />
       <div className="portfolio-noise pointer-events-none absolute inset-0 -z-10 opacity-30" />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
-          <div>
+          <div className="hero-copy">
             <div className="reveal mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/75 px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/65 dark:text-slate-300">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
@@ -23,7 +26,7 @@ export function Hero() {
             <p className="reveal mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-600 dark:text-accent-400" data-reveal-delay="30">
               QA ENGINEER <span className="text-slate-300 dark:text-slate-700">/</span> MUMBAI, INDIA
             </p>
-            <h1 className="reveal text-balance max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-7xl lg:text-[5.2rem]" data-reveal-delay="60">
+            <h1 className="reveal hero-title text-balance max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-7xl lg:text-[5.2rem]" data-reveal-delay="60">
               {SITE.name}
             </h1>
             <p className="reveal mt-6 max-w-2xl text-xl font-semibold leading-snug tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl" data-reveal-delay="120">
@@ -58,9 +61,10 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="reveal relative lg:block" data-reveal-delay="180">
+          <div className="reveal scroll-depth relative lg:block" data-reveal-delay="180" data-scroll-depth="1.25">
             <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-accent-500/10 via-transparent to-sky-400/10 blur-2xl" />
-            <div className="glass-panel relative overflow-hidden rounded-[1.75rem] p-5 sm:p-6">
+            <div className="glass-panel cinematic-card relative overflow-hidden rounded-[1.75rem] p-5 sm:p-6">
+              <div className="hero-card-glow absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-500/20 blur-3xl" />
               <div className="flex items-center justify-between border-b border-slate-200/70 pb-4 dark:border-slate-800/80">
                 <div className="flex items-center gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-lg dark:bg-white dark:text-slate-950">
@@ -71,7 +75,7 @@ export function Hero() {
                     <p className="text-xs text-slate-500 dark:text-slate-400">Evidence over assumptions</p>
                   </div>
                 </div>
-                <Sparkles className="h-4 w-4 text-accent-500" />
+                <Sparkles className="h-4 w-4 animate-pulse text-accent-500" />
               </div>
 
               <div className="mt-5 rounded-2xl bg-slate-950 p-5 font-mono text-xs text-slate-300 shadow-inner dark:bg-black/35">
@@ -107,7 +111,7 @@ export function Hero() {
         </div>
 
         <a href="#about" className="reveal mt-16 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-accent-500 sm:inline-flex" data-reveal-delay="360">
-          Scroll to explore <ArrowDownRight className="h-3.5 w-3.5" />
+          Scroll to explore <ArrowDownRight className="h-3.5 w-3.5 animate-bounce" />
         </a>
       </div>
     </section>
