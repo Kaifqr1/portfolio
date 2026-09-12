@@ -10,6 +10,7 @@ type Project = {
   tools: string[];
   github?: string;
   demo?: string;
+  caseStudy?: string;
 };
 
 const projects: Project[] = [
@@ -22,6 +23,7 @@ const projects: Project[] = [
     tools: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Node.js', 'Express', 'tRPC', 'TiDB', 'Cloudinary', 'Vercel', 'Vitest'],
     github: 'https://github.com/Kaifqr1/QR_Serve',
     demo: 'https://qr-serve-three.vercel.app',
+    caseStudy: '#case-studies',
   },
   {
     name: 'ShopCraft',
@@ -51,6 +53,7 @@ const projects: Project[] = [
     tools: ['React', 'TypeScript', 'AI API', 'Tailwind CSS', 'Postman', 'Git'],
     github: 'https://github.com/Kaifqr1/code-roast',
     demo: 'https://code-roast-smell-code-roast.vercel.app/',
+    caseStudy: '#case-studies',
   },
 ];
 
@@ -93,7 +96,7 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
           <div className="mt-5 flex flex-wrap gap-4 border-t border-slate-200 pt-4 text-sm font-semibold dark:border-slate-800">
             {project.github && <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-700 hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"><Github className="h-4 w-4" /> Source</a>}
             {project.demo && <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-700 hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"><ArrowUpRight className="h-4 w-4" /> Live</a>}
-            {project.caseStudy && <a href={project.caseStudy} className="inline-flex items-center gap-1.5 text-slate-700 hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"><ShieldCheck className="h-4 w-4" /> QA Lab</a>}
+            {project.caseStudy && <a href={project.caseStudy} className="inline-flex items-center gap-1.5 text-slate-700 hover:text-accent-600 dark:text-slate-300 dark:hover:text-accent-400"><ShieldCheck className="h-4 w-4" /> Case study</a>}
           </div>
         </div>
       </div>
