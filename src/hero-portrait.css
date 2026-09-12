@@ -11,8 +11,27 @@
 @media(prefers-reduced-motion:reduce){.hero-planet{animation:none!important}}
 
 /* About section — use Kaif's portrait in the existing editorial card */
-.about-portrait{background-image:linear-gradient(to top,rgba(0,0,0,.76) 0%,rgba(0,0,0,.18) 38%,rgba(0,0,0,0) 68%),url('./assets/kaif-portrait.svg');background-size:cover;background-position:center;}
-.about-portrait:before,.about-portrait .portrait-grid,.about-portrait .portrait-orbit{display:none;}
-.about-portrait strong,.about-portrait span{z-index:2;text-shadow:0 2px 16px rgba(0,0,0,.45);}
+.about-portrait{background:#111 url('./assets/kaif-portrait.svg') center 20%/cover no-repeat !important;}
+.about-portrait:before,.about-portrait .portrait-grid,.about-portrait .portrait-orbit{display:none !important;}
+.about-portrait strong,.about-portrait span{position:relative;z-index:2;text-shadow:0 2px 16px rgba(0,0,0,.45);}
 .about-portrait strong{font-weight:900;}
-@media(max-width:800px){.about-portrait{min-height:430px;height:78vw;background-position:center top;}}
+@media(max-width:800px){.about-portrait{min-height:420px;height:78vw;background-position:center top !important;}}
+
+/* Compact section rhythm — remove accidental viewport-height gaps on mobile and desktop. */
+.services-section,.projects-section,.about-section,.case-section,.lab-section,.contact-section,.quote-section{min-height:0 !important;}
+.services-section,.projects-section,.lab-section,.contact-section{padding-top:clamp(64px,8vw,110px) !important;padding-bottom:clamp(64px,8vw,110px) !important;}
+.about-section,.case-section,.quote-section{padding-top:clamp(64px,8vw,110px) !important;padding-bottom:clamp(64px,8vw,110px) !important;}
+.lab-section .lab-grid{margin-top:42px;}
+.quote-section{min-height:42vh !important;display:grid;place-items:center;}
+@media(max-width:800px){
+  .services-section,.projects-section,.lab-section,.contact-section,.about-section,.case-section{padding-top:46px !important;padding-bottom:46px !important;}
+  .quote-section{padding-top:42px !important;padding-bottom:42px !important;min-height:38vh !important;}
+  .section-kicker{margin-bottom:12px;}
+  .section-title-row h2,.contact-section h2{font-size:clamp(3.5rem,15vw,6.5rem);}
+  .section-intro{margin-top:20px;margin-bottom:28px;}
+  .about-grid{margin-top:30px;gap:28px;}
+  .project-stack{margin-top:28px;gap:24px;}
+  .lab-grid{margin-top:30px !important;gap:28px;}
+  .contact-section h2{margin:26px 0 24px;}
+  .contact-links{margin-top:32px;}
+}
