@@ -1,98 +1,135 @@
-/* Mobile hero — deliberate full-viewport composition. */
-@media (max-width:800px){
+/* Hero composition — centered on every viewport. */
+.editorial-hero{
+  min-height:100svh!important;
+  height:100svh!important;
+  position:relative!important;
+  overflow:hidden!important;
+}
+
+.hero-name{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:50%!important;
+  bottom:auto!important;
+  width:min(1180px,92vw)!important;
+  max-width:1180px!important;
+  margin:0!important;
+  transform:translate(-50%,-50%)!important;
+  z-index:4!important;
+  text-align:center!important;
+}
+
+.hero-name h1{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  padding:0!important;
+  line-height:.82!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-align:center!important;
+}
+
+.hero-name .hero-line{
+  display:block!important;
+  width:100%!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+
+.hero-name .hero-char{
+  position:relative!important;
+  display:inline-block!important;
+}
+
+.hero-name>p{
+  text-align:center!important;
+}
+
+/* Keep the planet as a supporting visual, never the focal point. */
+.hero-planet{
+  z-index:1!important;
+}
+
+.hero-copy{
+  z-index:5!important;
+}
+
+@media(max-width:800px){
   .editorial-hero{
-    min-height:100svh!important;
-    height:100svh!important;
-    padding:72px 16px 18px!important;
-    display:block!important;
-    position:relative!important;
-    overflow:hidden!important;
+    padding:0 16px 18px!important;
   }
   .hero-meta{
-    position:absolute!important;
     left:16px!important;
     right:16px!important;
     top:72px!important;
-    z-index:5!important;
-  }
-  .hero-planet{
-    width:68vw!important;
-    max-width:none!important;
-    right:-9vw!important;
-    top:8%!important;
-    opacity:.92!important;
-    z-index:1!important;
   }
   .hero-name{
-    position:absolute!important;
-    left:16px!important;
-    right:16px!important;
-    top:auto!important;
-    bottom:27%!important;
-    width:auto!important;
+    left:50%!important;
+    right:auto!important;
+    top:50%!important;
+    bottom:auto!important;
+    width:calc(100vw - 24px)!important;
     max-width:none!important;
-    margin:0!important;
-    z-index:4!important;
+    transform:translate(-50%,-50%)!important;
   }
   .hero-name p{
     margin:0 0 12px!important;
-    font-size:8px!important;
-    letter-spacing:.28em!important;
+    font-size:7px!important;
+    letter-spacing:.24em!important;
   }
   .hero-name h1{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin:0!important;
-    padding:0!important;
     font-size:12.2vw!important;
     line-height:.82!important;
     letter-spacing:-.065em!important;
-    white-space:nowrap!important;
-    overflow:visible!important;
+  }
+  .hero-name .hero-line{
+    width:100%!important;
   }
   .hero-copy{
-    position:absolute!important;
     left:16px!important;
     right:16px!important;
     bottom:9%!important;
     width:auto!important;
     max-width:390px!important;
     margin:0 0 0 auto!important;
-    z-index:5!important;
     text-align:right!important;
   }
-  .hero-copy p{font-size:12px!important;line-height:1.55!important;margin:0 0 14px!important;}
+  .hero-copy p{
+    font-size:12px!important;
+    line-height:1.55!important;
+    margin:0 0 14px!important;
+  }
   .hero-copy a{font-size:8px!important;}
   .hero-bottom{
-    position:absolute!important;
     left:16px!important;
     right:16px!important;
     bottom:2.5%!important;
-    z-index:5!important;
+  }
+  .hero-planet{
+    width:58vw!important;
+    right:-10vw!important;
+    top:12%!important;
+    opacity:.82!important;
   }
 }
 
-@media (max-width:380px){
+@media(max-width:380px){
   .editorial-hero{padding-left:14px!important;padding-right:14px!important;}
   .hero-meta{left:14px!important;right:14px!important;}
-  .hero-name{left:14px!important;right:14px!important;bottom:28%!important;}
+  .hero-name{width:calc(100vw - 18px)!important;}
   .hero-name h1{font-size:11.7vw!important;letter-spacing:-.06em!important;}
   .hero-copy{left:14px!important;right:14px!important;bottom:10%!important;}
   .hero-bottom{left:14px!important;right:14px!important;bottom:2%!important;}
 }
 
-/* About: remove the portrait/image panel and let the copy use the full section width. */
+/* About: use the full section width without the portrait panel. */
 .about-section .about-portrait{display:none!important}
 .about-section .about-grid{display:block!important;margin-top:38px!important}
 .about-section .about-text{max-width:900px!important;width:100%!important;margin:0!important;align-self:auto!important}
 @media(max-width:800px){
   .about-section .about-grid{margin-top:28px!important}
   .about-section .about-text{max-width:none!important}
-}
-
-/* Desktop hero remains a spacious editorial composition. */
-@media (min-width:801px){
-  .editorial-hero{min-height:100svh!important;}
-  .hero-name h1{max-width:100%!important;}
 }
