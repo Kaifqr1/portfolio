@@ -1,26 +1,22 @@
 /* Hero composition — centered on every viewport. */
-.editorial-hero{
-  min-height:100svh!important;
-  height:100svh!important;
-  position:relative!important;
-  overflow:hidden!important;
-}
-.hero-name{position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(1180px,92vw)!important;max-width:1180px!important;margin:0!important;transform:translate(-50%,-50%)!important;z-index:4!important;text-align:center!important;}
-.hero-name h1{display:block!important;width:100%!important;max-width:none!important;margin:0 auto!important;padding:0!important;line-height:.82!important;white-space:normal!important;overflow:visible!important;text-align:center!important;font-size:clamp(76px,7.35vw,132px)!important;letter-spacing:-.065em!important;}
-.hero-name .hero-line{display:block!important;width:100%!important;white-space:nowrap!important;text-align:center!important;}
+.editorial-hero{min-height:100svh!important;height:100svh!important;position:relative!important;overflow:hidden!important;}
+.hero-name{position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(1180px,94vw)!important;max-width:1180px!important;margin:0!important;transform:translate(-50%,-50%)!important;z-index:4!important;text-align:center!important;}
+.hero-name h1{display:block!important;width:100%!important;max-width:none!important;margin:0 auto!important;padding:0!important;line-height:.82!important;white-space:normal!important;overflow:visible!important;text-align:center!important;}
+.hero-name .hero-line{display:block!important;width:100%!important;white-space:nowrap!important;text-align:center!important;overflow:visible!important;}
 .hero-name .hero-char{position:relative!important;display:inline-block!important;}
-.hero-name>p{text-align:center!important;}.hero-planet{z-index:1!important;}.hero-copy{z-index:5!important;}
+.hero-name>p{text-align:center!important}.hero-planet{z-index:1!important}.hero-copy{z-index:5!important;}
+
+/* Desktop: use viewport-relative type so QURESHI can never be clipped. */
+@media(min-width:801px){
+  .hero-name{width:94vw!important;}
+  .hero-name h1{font-size:clamp(76px,8.7vw,150px)!important;line-height:.82!important;letter-spacing:-.065em!important;}
+  .hero-name .hero-line{overflow:visible!important;}
+  .hero-name .hero-char{max-width:none!important;}
+}
 
 /* The intro paragraph is anchored to the bottom on every viewport. */
 .hero-copy{position:absolute!important;left:auto!important;right:clamp(24px,6vw,96px)!important;bottom:8%!important;width:min(430px,38vw)!important;margin:0!important;text-align:right!important;}
 .hero-copy p{margin:0 0 16px!important;}
-
-@media(min-width:801px){
-  /* Keep the entire three-line name inside the desktop viewport. */
-  .hero-name{width:min(1180px,90vw)!important;}
-  .hero-name h1{font-size:clamp(72px,7.1vw,128px)!important;line-height:.82!important;letter-spacing:-.065em!important;}
-  .hero-name .hero-line{overflow:visible!important;}
-}
 
 @media(max-width:800px){
   .editorial-hero{padding:0 16px 18px!important;}
@@ -51,7 +47,5 @@
   .hero-bottom{left:14px!important;right:14px!important;bottom:2%!important;}
 }
 
-.about-section .about-portrait{display:none!important}
-.about-section .about-grid{display:block!important;margin-top:38px!important}
-.about-section .about-text{max-width:900px!important;width:100%!important;margin:0!important;align-self:auto!important}
+.about-section .about-portrait{display:none!important}.about-section .about-grid{display:block!important;margin-top:38px!important}.about-section .about-text{max-width:900px!important;width:100%!important;margin:0!important;align-self:auto!important;}
 @media(max-width:800px){.about-section .about-grid{margin-top:28px!important}.about-section .about-text{max-width:none!important}}
