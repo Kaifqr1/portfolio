@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { SITE } from '@/data';
 import './portfolio-enhancer.css';
 
 const injectAfter = (selector: string, html: string) => {
@@ -10,7 +9,6 @@ const injectAfter = (selector: string, html: string) => {
 
 export default function PortfolioEnhancer() {
   useEffect(() => {
-    // Remove any legacy custom-cursor nodes/classes from older builds.
     document.querySelectorAll('.cursor-dot,.cursor-ring').forEach(node => node.remove());
     document.body.classList.remove('cursor-ready', 'cursor-hover');
 
@@ -18,9 +16,7 @@ export default function PortfolioEnhancer() {
     if (nav && !nav.querySelector('[data-recruiter-toggle]')) {
       const wrap = document.createElement('div');
       wrap.className = 'enhancer-nav-actions';
-      wrap.innerHTML = `
-        <button class="enhancer-recruiter" data-recruiter-toggle type="button" aria-pressed="false">RECRUITER MODE</button>
-      `;
+      wrap.innerHTML = `<button class="enhancer-recruiter" data-recruiter-toggle type="button" aria-pressed="false">RECRUITER MODE</button>`;
       const menu = nav.querySelector('.menu-button');
       if (menu) nav.insertBefore(wrap, menu);
       else nav.appendChild(wrap);
@@ -79,7 +75,8 @@ export default function PortfolioEnhancer() {
       recruiterButton?.setAttribute('aria-pressed', String(active));
       if (recruiterButton) recruiterButton.textContent = active ? 'FULL MODE' : 'RECRUITER MODE';
     };
-    recruiterButton?.addEventListener('click', () => applyRecruiter(!root?.classList.contains('recruiter-mode')));
+    const toggleRecruiter = () => applyRecruiter(!root?.classList.contains('recruiter-mode'));
+    recruiterButton?.addEventListener('click', toggleRecruiter);
 
     const runButton = document.querySelector<HTMLButtonElement>('.enhancer-run');
     const state = document.querySelector<HTMLElement>('[data-run-state]');
@@ -96,10 +93,8 @@ export default function PortfolioEnhancer() {
         window.setTimeout(() => row.classList.add('is-run'), index * 220);
       });
       runTimer = window.setTimeout(() => {
-        document.querySelector('[data-check="01"] b')!.textContent = 'PASS';
-        document.querySelector('[data-check="02"] b')!.textContent = 'PASS';
-        document.querySelector('[data-check="03"] b')!.textContent = 'REVIEW';
-        document.querySelector('[data-check="04"] b')!.textContent = 'REVIEW';
+        ['01','02'].forEach(id => { const badge = document.querySelector(`[data-check="${id}"] b`); if (badge) badge.textContent = 'PASS'; });
+        ['03','04'].forEach(id => { const badge = document.querySelector(`[data-check="${id}"] b`); if (badge) badge.textContent = 'REVIEW'; });
         if (state) state.textContent = 'COMPLETE';
         if (result) result.textContent = '2 PASS · 2 REVIEW · NEXT: DOCUMENT & VERIFY';
         if (runButton) { runButton.disabled = false; runButton.textContent = 'RUN AGAIN ↗'; }
@@ -107,21 +102,14 @@ export default function PortfolioEnhancer() {
     };
     runButton?.addEventListener('click', runQa);
 
-    const recruiter = document.querySelector('.recruiter-mode');
-    if (recruiter) applyRecruiter(true);
-
     return () => {
       window.clearTimeout(runTimer);
-      recruiterButton?.removeEventListener('click', () => applyRecruiter(false));
+      recruiterButton?.removeEventListener('click', toggleRecruiter);
       runButton?.removeEventListener('click', runQa);
       document.querySelectorAll('[data-enhancer-section]').forEach(node => node.remove());
-      if (wrapExists(nav)) nav?.querySelector('.enhancer-nav-actions')?.remove();
+      nav?.querySelector('.enhancer-nav-actions')?.remove();
     };
   }, []);
 
   return null;
-}
-
-function wrapExists(node: Element | null) {
-  return Boolean(node?.querySelector('.enhancer-nav-actions'));
 }
