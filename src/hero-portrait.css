@@ -1,6 +1,6 @@
 /* Hero composition — centered on every viewport. */
 .editorial-hero{min-height:100svh!important;height:100svh!important;position:relative!important;overflow:hidden!important;}
-.hero-name{position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(1180px,94vw)!important;max-width:1180px!important;margin:0!important;transform:translate(-50%,-50%)!important;z-index:4!important;text-align:center!important;}
+.hero-name{position:absolute!important;left:50%!important;right:auto!important;top:48%!important;bottom:auto!important;width:min(1180px,94vw)!important;max-width:1180px!important;margin:0!important;transform:translate(-50%,-50%)!important;z-index:4!important;text-align:center!important;}
 .hero-name h1{display:block!important;width:100%!important;max-width:none!important;margin:0 auto!important;padding:0!important;line-height:.82!important;white-space:normal!important;overflow:visible!important;text-align:center!important;}
 /* The JSX uses block hero lines; hide the legacy <br> tags so they cannot create extra line boxes and push QURESHI below the clipped hero. */
 .hero-name h1 br{display:none!important;}
@@ -8,10 +8,10 @@
 .hero-name .hero-char{position:relative!important;display:inline-block!important;}
 .hero-name>p{text-align:center!important}.hero-planet{z-index:1!important}.hero-copy{z-index:5!important;}
 
-/* Desktop: size from both viewport width and height so all three name lines always fit. */
+/* Desktop: deliberately smaller, viewport-safe type so MOHAMMED / KAIF / QURESHI all remain visible. */
 @media(min-width:801px){
-  .hero-name{width:94vw!important;}
-  .hero-name h1{font-size:clamp(64px,min(8.2vw,12vh),140px)!important;line-height:.78!important;letter-spacing:-.065em!important;}
+  .hero-name{width:92vw!important;top:47%!important;}
+  .hero-name h1{font-size:clamp(54px,min(7.2vw,10vh),124px)!important;line-height:.78!important;letter-spacing:-.06em!important;}
   .hero-name .hero-line{overflow:visible!important;}
   .hero-name .hero-char{max-width:none!important;}
 }
@@ -23,9 +23,10 @@
 @media(max-width:800px){
   .editorial-hero{padding:0 16px 18px!important;}
   .hero-meta{left:16px!important;right:16px!important;top:72px!important;}
-  .hero-name{left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:calc(100vw - 32px)!important;max-width:none!important;transform:translate(-50%,-50%)!important;}
-  .hero-name p{margin:0 0 12px!important;font-size:7px!important;letter-spacing:.22em!important;}
-  .hero-name h1{font-size:13vw!important;line-height:.84!important;letter-spacing:-.075em!important;}
+  .hero-name{left:50%!important;right:auto!important;top:46%!important;bottom:auto!important;width:calc(100vw - 32px)!important;max-width:none!important;transform:translate(-50%,-50%)!important;}
+  .hero-name p{margin:0 0 10px!important;font-size:7px!important;letter-spacing:.2em!important;}
+  /* Smaller mobile type keeps the full name comfortably inside narrow screens. */
+  .hero-name h1{font-size:11vw!important;line-height:.84!important;letter-spacing:-.065em!important;}
   .hero-name .hero-line{display:block!important;width:100%!important;white-space:nowrap!important;overflow:visible!important;text-align:center!important;}
   .hero-name .hero-char{display:inline-block!important;white-space:normal!important;}
   .hero-name .hero-line em{display:inline!important;font-style:normal!important;}
@@ -43,8 +44,8 @@
 @media(max-width:380px){
   .editorial-hero{padding-left:14px!important;padding-right:14px!important;}
   .hero-meta{left:14px!important;right:14px!important;}
-  .hero-name{width:calc(100vw - 28px)!important;}
-  .hero-name h1{font-size:12.2vw!important;letter-spacing:-.07em!important;}
+  .hero-name{width:calc(100vw - 28px)!important;top:45%!important;}
+  .hero-name h1{font-size:10.2vw!important;letter-spacing:-.06em!important;}
   .hero-copy{left:14px!important;right:14px!important;bottom:7%!important;}
   .hero-bottom{left:14px!important;right:14px!important;bottom:2%!important;}
 }
