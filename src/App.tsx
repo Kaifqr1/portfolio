@@ -6,6 +6,7 @@ import './editorial-motion.css';
 import './creative-scroll.css';
 import './hero-portrait.css';
 import './space-tight.css';
+import './premium-motion.css';
 
 const services = [
   ['01', 'Manual QA', 'Requirement checks, test cases, functional testing, regression and usability validation.'],
@@ -51,7 +52,8 @@ function useScrollMotion() {
       document.documentElement.style.setProperty('--bottom-drift', `${Math.min(window.scrollY * -0.04, 25)}px`);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update(); window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
   }, []);
 }
@@ -69,31 +71,86 @@ const Char = ({ children, space = false }: { children?: string; space?: boolean 
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   useReveal(); useScrollMotion();
 
   useEffect(() => {
+    const start = performance.now();
+    const duration = 1150;
+    let frame = 0;
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setLoadProgress(progress);
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else window.setTimeout(() => setLoading(false), 180);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
     const onMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth - 0.5) * 36;
       const y = (event.clientY / window.innerHeight - 0.5) * 36;
       heroRef.current?.style.setProperty('--mouse-x', `${x}px`);
       heroRef.current?.style.setProperty('--mouse-y', `${y}px`);
+      if (!isTouch) {
+        document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
+        document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+        document.querySelector<HTMLElement>('.cursor-dot')?.style.setProperty('transform', `translate3d(${event.clientX}px,${event.clientY}px,0)`);
+        document.querySelector<HTMLElement>('.cursor-ring')?.style.setProperty('transform', `translate3d(${event.clientX}px,${event.clientY}px,0)`);
+        document.body.classList.add('cursor-ready');
+      }
     };
+    const onOver = (event: MouseEvent) => { if ((event.target as HTMLElement)?.closest('a,button,.project-card')) document.body.classList.add('cursor-hover'); };
+    const onOut = (event: MouseEvent) => { if ((event.target as HTMLElement)?.closest('a,button,.project-card')) document.body.classList.remove('cursor-hover'); };
     window.addEventListener('pointermove', onMove, { passive: true });
-    return () => window.removeEventListener('pointermove', onMove);
+    window.addEventListener('mouseover', onOver, { passive: true });
+    window.addEventListener('mouseout', onOut, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('mouseover', onOver);
+      window.removeEventListener('mouseout', onOut);
+      document.body.classList.remove('cursor-ready', 'cursor-hover');
+    };
   }, []);
 
+  const handleProjectMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 5;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -5;
+    event.currentTarget.style.setProperty('--tilt-x', `${x}deg`);
+    event.currentTarget.style.setProperty('--tilt-y', `${y}deg`);
+  };
+  const resetProjectTilt = (event: React.MouseEvent<HTMLElement>) => {
+    event.currentTarget.style.setProperty('--tilt-x', '0deg');
+    event.currentTarget.style.setProperty('--tilt-y', '0deg');
+  };
+
   return <div className="editorial-site">
+    <div className={`site-loader${loading ? '' : ' is-done'}`} aria-hidden={!loading}>
+      <div className="loader-inner">
+        <div className="loader-top"><span>MKQ / 2026</span><span>{Math.round(loadProgress * 100)}%</span></div>
+        <h1 className="loader-name">MOHAMMED<br />KAIF QU.</h1>
+        <div className="loader-bar"><i style={{ '--loader-progress': loadProgress } as React.CSSProperties} /></div>
+      </div>
+    </div>
+    <div className="cursor-dot" aria-hidden="true" /><div className="cursor-ring" aria-hidden="true" />
     <div className="page-progress" />
     <header className="editorial-nav">
-      <a href="#home" className="brand-mark">MKQ<span>®</span></a>
+      <a href="#home" className="brand-mark magnetic">MKQ<span>®</span></a>
       <div className="nav-status">QA ENGINEER <b>/</b> MUMBAI</div>
-      <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Open navigation">{menuOpen ? <X /> : <Menu />}</button>
+      <button className="menu-button magnetic" onClick={() => setMenuOpen(v => !v)} aria-label="Open navigation">{menuOpen ? <X /> : <Menu />}</button>
     </header>
     {menuOpen && <div className="menu-panel">{['home', 'services', 'about', 'projects', 'case-studies', 'qa-lab', 'contact'].map((id, i) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}><span>0{i + 1}</span>{id.toUpperCase()}<ArrowUpRight /></a>)}</div>}
 
     <main>
       <section id="home" ref={heroRef} className="editorial-hero">
+        <div className="hero-stage" aria-hidden="true"><div className="hero-grid-depth" /><div className="hero-orb-small" /></div>
         <div className="hero-planet" aria-hidden="true"><div className="planet-ring" /><div className="planet-core" /><div className="planet-glint" /></div>
         <div className="hero-meta" data-reveal><span>04.0</span><span>QUALITY / NO ASSUMPTIONS</span></div>
         <div className="hero-name" data-reveal>
@@ -104,7 +161,7 @@ export default function App() {
             <span className="hero-line"><Char>Q</Char><Char>U</Char><Char>R</Char><Char>E</Char><Char>S</Char><Char>H</Char><Char>I</Char></span>
           </h1>
         </div>
-        <div className="hero-copy" data-reveal><p>I help teams ship dependable digital experiences through thoughtful testing, clear defect reporting and a user-first QA mindset.</p><a href="#projects">EXPLORE WORK <ArrowDownRight /></a></div>
+        <div className="hero-copy" data-reveal><p>I help teams ship dependable digital experiences through thoughtful testing, clear defect reporting and a user-first QA mindset.</p><a className="magnetic" href="#projects">EXPLORE WORK <ArrowDownRight /></a></div>
         <div className="hero-bottom"><span>SCROLL TO EXPLORE</span><span>↓</span></div>
       </section>
 
@@ -126,10 +183,10 @@ export default function App() {
       <section id="projects" className="projects-section dark-section">
         <div className="section-kicker" data-reveal>SELECTED WORK / BUILT TO BE TESTED</div><div className="section-title-row" data-reveal><h2>PROJECTS</h2><span>04</span></div>
         <p className="section-intro" data-reveal>PRODUCTS AND EXPERIENCES WHERE I CAN SHOW BOTH SIDES OF THE WORK — BUILDING THE FLOW AND THINKING ABOUT HOW IT BREAKS.</p>
-        <div className="project-stack">{projects.map(project => <a className="project-card" href={project.href} target={project.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" key={project.number} data-reveal><VisualMark accent={project.accent} /><div className="project-info"><span>{project.number} / {project.type}</span><h3>{project.title}</h3><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <b key={tag}>{tag}</b>)}</div></div><ArrowUpRight className="project-arrow" /></a>)}</div>
+        <div className="project-stack">{projects.map(project => <a className="project-card" href={project.href} target={project.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" key={project.number} data-reveal onMouseMove={handleProjectMove} onMouseLeave={resetProjectTilt}><VisualMark accent={project.accent} /><div className="project-info"><span>{project.number} / {project.type}</span><h3>{project.title}</h3><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <b key={tag}>{tag}</b>)}</div></div><ArrowUpRight className="project-arrow" /></a>)}</div>
       </section>
 
-      <section id="case-studies" className="case-section"><div className="case-copy" data-reveal><div className="section-kicker">HOW I THINK / HOW I TEST</div><h2>QUALITY IS<br /><em>NOT</em> A FINAL STEP.</h2><p>I look at a product as a system of user journeys. Understand the requirement, explore the edges, validate the API where useful, document the defect clearly and verify the fix.</p><a href="#qa-lab">SEE QA LAB <ArrowUpRight /></a></div><div className="case-grid" data-reveal><div><span>01</span><strong>UNDERSTAND</strong><p>Requirements, acceptance criteria and risk.</p></div><div><span>02</span><strong>EXPLORE</strong><p>Happy paths, edge cases and unexpected behaviour.</p></div><div><span>03</span><strong>REPORT</strong><p>Evidence, reproduction steps and impact.</p></div><div><span>04</span><strong>VERIFY</strong><p>Retest the fix and protect it with regression thinking.</p></div></div></section>
+      <section id="case-studies" className="case-section"><div className="case-copy" data-reveal><div className="section-kicker">HOW I THINK / HOW I TEST</div><h2>QUALITY IS<br /><em>NOT</em> A FINAL STEP.</h2><p>I look at a product as a system of user journeys. Understand the requirement, explore the edges, validate the API where useful, document the defect clearly and verify the fix.</p><a className="magnetic" href="#qa-lab">SEE QA LAB <ArrowUpRight /></a></div><div className="case-grid" data-reveal><div><span>01</span><strong>UNDERSTAND</strong><p>Requirements, acceptance criteria and risk.</p></div><div><span>02</span><strong>EXPLORE</strong><p>Happy paths, edge cases and unexpected behaviour.</p></div><div><span>03</span><strong>REPORT</strong><p>Evidence, reproduction steps and impact.</p></div><div><span>04</span><strong>VERIFY</strong><p>Retest the fix and protect it with regression thinking.</p></div></div></section>
 
       <section id="qa-lab" className="lab-section dark-section"><div className="section-kicker" data-reveal>QA LAB / EVIDENCE OVER ASSUMPTIONS</div><div className="lab-grid"><div data-reveal><h2>TEST.<br /><em>BREAK.</em><br />VERIFY.</h2></div><div data-reveal><p>My QA Lab turns learning into visible evidence: test scenarios, API collections, bug reports, regression checks and small automation experiments.</p><div className="lab-terminal"><span>qa-workflow</span><p>01&nbsp; define → test requirements</p><p>02&nbsp; explore → probe edge cases</p><p>03&nbsp; report → reproduce defects</p><p>04&nbsp; verify → regress the fix</p><i>QUALITY GATE / READY TO TEST</i></div></div></div></section>
 
