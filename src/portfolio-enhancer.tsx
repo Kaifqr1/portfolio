@@ -44,7 +44,7 @@ export default function PortfolioEnhancer() {
                 <div class="bug-checkout"><strong>TOTAL ₹289</strong><button type="button" data-bug-target="cta">PLACE ORDER</button></div>
               </div>
               <button class="bug-target one" type="button" data-bug-target="wrong-focus" aria-label="Potential bug">UPI</button>
-              <button class="bug-target two" type="button" data-bug-target="toast">!</button>
+              <span class="bug-target two" aria-hidden="true">!</span>
             </div>
           </div>
           <aside class="bug-hunt-side">
