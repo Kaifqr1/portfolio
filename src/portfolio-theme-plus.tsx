@@ -35,7 +35,7 @@ export default function PortfolioThemePlus() {
           <article class="theme-plus-proof-card"><span>03 / FLOW</span><strong>06</strong><p>Discover, plan, test, report, verify and ship as a repeatable workflow.</p></article>
           <article class="theme-plus-proof-card"><span>04 / FOCUS</span><strong>QA</strong><p>Built around software quality, product thinking and clear communication.</p></article>
         </div>
-        <div class="theme-plus-availability"><i class="theme-plus-pulse"></i><span>OPEN TO QA / SOFTWARE OPPORTUNITIES</span></div>
+        <div class="theme-plus-availability"><i class="theme-plus-pulse"></i><span>QA / SOFTWARE FOCUS</span></div>
       </section>
     `;
     root.appendChild(shell);
