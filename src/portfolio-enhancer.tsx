@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import './portfolio-enhancer.css';
+import './bug-hunt.css';
 
 const injectAfter = (selector: string, html: string) => {
   const anchor = document.querySelector(selector);
@@ -11,16 +12,6 @@ export default function PortfolioEnhancer() {
   useEffect(() => {
     document.querySelectorAll('.cursor-dot,.cursor-ring').forEach(node => node.remove());
     document.body.classList.remove('cursor-ready', 'cursor-hover');
-
-    const nav = document.querySelector('.editorial-nav');
-    if (nav && !nav.querySelector('[data-recruiter-toggle]')) {
-      const wrap = document.createElement('div');
-      wrap.className = 'enhancer-nav-actions';
-      wrap.innerHTML = `<button class="enhancer-recruiter" data-recruiter-toggle type="button" aria-pressed="false">RECRUITER MODE</button>`;
-      const menu = nav.querySelector('.menu-button');
-      if (menu) nav.insertBefore(wrap, menu);
-      else nav.appendChild(wrap);
-    }
 
     injectAfter('#projects', `
       <section class="enhancer-case-section" data-enhancer-section id="deep-dive">
@@ -34,33 +25,36 @@ export default function PortfolioEnhancer() {
     `);
 
     injectAfter('#qa-lab', `
-      <section class="enhancer-qa-section" data-enhancer-section id="bug-hunt">
-        <div class="section-kicker">BUG HUNT / FIND THE FAILURE</div>
-        <div class="bug-hunt-shell">
-          <div class="bug-hunt-head">
-            <div><span class="bug-hunt-label">QA MINI GAME / 01</span><h2>HUNT THE<br /><em>BUG.</em></h2><p>Read the product screen like a tester. Find the UI clue that breaks the intended flow, then flag it before the timer runs out.</p></div>
-            <div class="bug-hunt-stats"><span>TIME <b data-bug-time>20</b></span><span>SCORE <b data-bug-score>0</b></span><span>ROUND <b data-bug-round>01</b></span></div>
+      <section class="bug-hunt" data-enhancer-section id="bug-hunt">
+        <div class="bug-hunt-head">
+          <div>
+            <div class="section-kicker">BUG HUNT / FIND THE FAILURE</div>
+            <h2>HUNT THE <em>BUG.</em></h2>
           </div>
-          <div class="bug-hunt-game" data-bug-game aria-label="Bug hunting mini game">
-            <div class="bug-hunt-toolbar"><span>checkout-flow / build 2.6.4</span><span data-bug-status>READY</span></div>
-            <div class="bug-hunt-browser">
-              <div class="bug-hunt-browser-top"><i></i><i></i><i></i><span>app.local / checkout</span></div>
-              <div class="bug-hunt-layout">
-                <div class="bug-hunt-summary"><small>ORDER SUMMARY</small><strong>Grilled Paneer Wrap</strong><span>Qty 01</span><b>₹249</b><div class="bug-hunt-line"></div><span>Delivery</span><b>₹40</b><div class="bug-hunt-line"></div><strong>Total</strong><b>₹289</b></div>
-                <div class="bug-hunt-form">
-                  <small>CONTACT DETAILS</small>
-                  <label>Email<input value="kaif@example.com" readonly /></label>
-                  <label>Phone<input value="98765 43210" readonly /></label>
-                  <div class="bug-hunt-choice"><button type="button" data-bug-target="wrong-focus">UPI</button><button type="button">Card</button><button type="button">Cash</button></div>
-                  <button class="bug-hunt-cta" type="button" data-bug-target="cta">PLACE ORDER</button>
-                  <span class="bug-hunt-toast" data-bug-toast>Payment method required</span>
-                </div>
+          <div class="bug-hunt-meta">QA MINI GAME / FIND 2 ISSUES<br />20 SECOND ROUND</div>
+        </div>
+        <div class="bug-hunt-wrap">
+          <div class="bug-hunt-board">
+            <div class="bug-hunt-top"><span>QA LAB / CHECKOUT-FLOW</span><span data-bug-status>READY</span></div>
+            <div class="bug-window">
+              <div class="bug-window-bar"><i></i><i></i><i></i><span>checkout / release-2.6.4</span></div>
+              <div class="bug-content">
+                <div class="bug-line"><span class="bug-title">Grilled Paneer Wrap</span><span class="bug-price">₹249</span></div>
+                <div class="bug-card"><div class="bug-thumb"></div><div class="bug-info"><strong>Combo Meal</strong><small>Wrap + fries + drink</small><div class="bug-qty"><button type="button">−</button><span>01</span><button type="button">+</button></div></div></div>
+                <div class="bug-checkout"><strong>TOTAL ₹289</strong><button type="button" data-bug-target="cta">PLACE ORDER</button></div>
               </div>
+              <button class="bug-target one" type="button" data-bug-target="wrong-focus" aria-label="Potential bug">UPI</button>
+              <button class="bug-target two" type="button" data-bug-target="toast">!</button>
             </div>
-            <div class="bug-hunt-hints"><span>TIP</span><p>One interaction is misleading. One element gives the wrong feedback.</p><button type="button" data-bug-hint>REVEAL CLUE</button></div>
           </div>
-          <div class="bug-hunt-result" data-bug-result hidden></div>
-          <button class="bug-hunt-start" type="button" data-bug-start>START BUG HUNT ↗</button>
+          <aside class="bug-hunt-side">
+            <h3>READ.<br />TEST.<br /><em>REPORT.</em></h3>
+            <p>Find the two intentional defects hidden in the checkout flow. Click the suspicious UI elements to flag them.</p>
+            <div class="bug-hunt-stats"><div class="bug-stat"><span>TIME</span><strong data-bug-time>20</strong></div><div class="bug-stat"><span>SCORE</span><strong data-bug-score>0</strong></div></div>
+            <button class="bug-start" type="button" data-bug-start>START BUG HUNT ↗</button>
+            <button class="bug-reset" type="button" data-bug-hint>REVEAL CLUE</button>
+            <div class="bug-status" data-bug-result hidden></div>
+          </aside>
         </div>
       </section>
     `);
@@ -83,26 +77,13 @@ export default function PortfolioEnhancer() {
       </section>
     `);
 
-    const recruiterButton = document.querySelector<HTMLButtonElement>('[data-recruiter-toggle]');
-    const root = document.querySelector('.editorial-site');
-    const applyRecruiter = (active: boolean) => {
-      root?.classList.toggle('recruiter-mode', active);
-      recruiterButton?.setAttribute('aria-pressed', String(active));
-      if (recruiterButton) recruiterButton.textContent = active ? 'FULL MODE' : 'RECRUITER MODE';
-    };
-    const toggleRecruiter = () => applyRecruiter(!root?.classList.contains('recruiter-mode'));
-    recruiterButton?.addEventListener('click', toggleRecruiter);
-
-    const game = document.querySelector<HTMLElement>('[data-bug-game]');
     const startButton = document.querySelector<HTMLButtonElement>('[data-bug-start]');
     const time = document.querySelector<HTMLElement>('[data-bug-time]');
     const score = document.querySelector<HTMLElement>('[data-bug-score]');
     const status = document.querySelector<HTMLElement>('[data-bug-status]');
     const result = document.querySelector<HTMLElement>('[data-bug-result]');
     const hint = document.querySelector<HTMLButtonElement>('[data-bug-hint]');
-    const cta = document.querySelector<HTMLButtonElement>('[data-bug-target="cta"]');
-    const focus = document.querySelector<HTMLButtonElement>('[data-bug-target="wrong-focus"]');
-    const toast = document.querySelector<HTMLElement>('[data-bug-toast]');
+    const targets = document.querySelectorAll<HTMLButtonElement>('[data-bug-target]');
     let countdown = 20;
     let currentScore = 0;
     let timer = 0;
@@ -113,23 +94,19 @@ export default function PortfolioEnhancer() {
       window.clearInterval(timer);
       started = false;
       if (status) status.textContent = 'COMPLETE';
-      if (game) game.classList.add('is-complete');
       if (result) {
         result.hidden = false;
-        result.innerHTML = `<span>ROUND COMPLETE</span><strong>${currentScore >= 2 ? 'BUGS FOUND.' : 'KEEP HUNTING.'}</strong><p>${currentScore}/2 issues identified. A tester should catch both before release.</p>`;
+        result.textContent = currentScore === 2 ? '2/2 BUGS FOUND — GREAT HUNT.' : `${currentScore}/2 BUGS FOUND — RUN IT AGAIN.`;
       }
       if (startButton) startButton.textContent = 'RUN AGAIN ↗';
     };
 
-    const markBug = (id: string) => {
+    const markBug = (id: string, element: HTMLElement) => {
       if (!started || found.has(id)) return;
       found.add(id);
       currentScore += 1;
+      element.classList.add('bug-found');
       if (score) score.textContent = String(currentScore);
-      const el = id === 'cta' ? cta : focus;
-      el?.classList.add('is-found');
-      if (id === 'cta' && toast) toast.textContent = 'BUG FOUND: order submits without a valid payment state';
-      if (id === 'wrong-focus' && toast) toast.textContent = 'BUG FOUND: selected UPI state is visually unclear';
       if (found.size === 2) window.setTimeout(endGame, 350);
     };
 
@@ -139,13 +116,11 @@ export default function PortfolioEnhancer() {
       currentScore = 0;
       found = new Set<string>();
       started = true;
-      if (time) time.textContent = String(countdown);
+      if (time) time.textContent = '20';
       if (score) score.textContent = '0';
       if (status) status.textContent = 'HUNTING';
       if (result) result.hidden = true;
-      if (game) game.classList.remove('is-complete');
-      [cta, focus].forEach(el => el?.classList.remove('is-found'));
-      if (toast) toast.textContent = 'Payment method required';
+      targets.forEach(target => target.classList.remove('bug-found'));
       if (startButton) startButton.textContent = 'RESTART HUNT ↗';
       timer = window.setInterval(() => {
         countdown -= 1;
@@ -154,27 +129,27 @@ export default function PortfolioEnhancer() {
       }, 1000);
     };
 
-    startButton?.addEventListener('click', startGame);
-    const handleCta = () => markBug('cta');
-    const handleFocus = () => markBug('wrong-focus');
+    const targetHandlers: Array<[HTMLButtonElement, () => void]> = [];
+    targets.forEach(target => {
+      const handler = () => markBug(target.dataset.bugTarget || 'bug', target);
+      targetHandlers.push([target, handler]);
+      target.addEventListener('click', handler);
+    });
+
     const handleHint = () => {
       if (!started) return;
-      if (hint) hint.textContent = 'CLUE: CHECK THE PAYMENT STATE';
-      if (toast) toast.textContent = 'Look closely: selection feedback and action state disagree.';
+      if (hint) hint.textContent = 'CLUE: CHECK THE CTA + PAYMENT STATE';
     };
-    cta?.addEventListener('click', handleCta);
-    focus?.addEventListener('click', handleFocus);
+
+    startButton?.addEventListener('click', startGame);
     hint?.addEventListener('click', handleHint);
 
     return () => {
       window.clearInterval(timer);
-      recruiterButton?.removeEventListener('click', toggleRecruiter);
       startButton?.removeEventListener('click', startGame);
-      cta?.removeEventListener('click', handleCta);
-      focus?.removeEventListener('click', handleFocus);
       hint?.removeEventListener('click', handleHint);
+      targetHandlers.forEach(([target, handler]) => target.removeEventListener('click', handler));
       document.querySelectorAll('[data-enhancer-section]').forEach(node => node.remove());
-      nav?.querySelector('.enhancer-nav-actions')?.remove();
     };
   }, []);
 
