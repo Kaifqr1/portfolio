@@ -2,14 +2,16 @@
 .editorial-hero{min-height:100svh!important;height:100svh!important;position:relative!important;overflow:hidden!important;}
 .hero-name{position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(1180px,94vw)!important;max-width:1180px!important;margin:0!important;transform:translate(-50%,-50%)!important;z-index:4!important;text-align:center!important;}
 .hero-name h1{display:block!important;width:100%!important;max-width:none!important;margin:0 auto!important;padding:0!important;line-height:.82!important;white-space:normal!important;overflow:visible!important;text-align:center!important;}
+/* The JSX uses block hero lines; hide the legacy <br> tags so they cannot create extra line boxes and push QURESHI below the clipped hero. */
+.hero-name h1 br{display:none!important;}
 .hero-name .hero-line{display:block!important;width:100%!important;white-space:nowrap!important;text-align:center!important;overflow:visible!important;}
 .hero-name .hero-char{position:relative!important;display:inline-block!important;}
 .hero-name>p{text-align:center!important}.hero-planet{z-index:1!important}.hero-copy{z-index:5!important;}
 
-/* Desktop: use viewport-relative type so QURESHI can never be clipped. */
+/* Desktop: size from both viewport width and height so all three name lines always fit. */
 @media(min-width:801px){
   .hero-name{width:94vw!important;}
-  .hero-name h1{font-size:clamp(76px,8.7vw,150px)!important;line-height:.82!important;letter-spacing:-.065em!important;}
+  .hero-name h1{font-size:clamp(64px,min(8.2vw,12vh),140px)!important;line-height:.78!important;letter-spacing:-.065em!important;}
   .hero-name .hero-line{overflow:visible!important;}
   .hero-name .hero-char{max-width:none!important;}
 }
