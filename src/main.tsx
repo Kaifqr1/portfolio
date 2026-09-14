@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import PortfolioEnhancer from './portfolio-enhancer.tsx';
 import './index.css';
+import './contact-consistency.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
