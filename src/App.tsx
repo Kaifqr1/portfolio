@@ -7,6 +7,7 @@ import './creative-scroll.css';
 import './hero-portrait.css';
 import './space-tight.css';
 import './premium-motion.css';
+import './responsive-fit.css';
 
 const services = [
   ['01', 'Manual QA', 'Requirement checks, test cases, functional testing, regression and usability validation.'],
@@ -188,13 +189,16 @@ export default function App() {
 
       <section id="case-studies" className="case-section"><div className="case-copy" data-reveal><div className="section-kicker">HOW I THINK / HOW I TEST</div><h2>QUALITY IS<br /><em>NOT</em> A FINAL STEP.</h2><p>I look at a product as a system of user journeys. Understand the requirement, explore the edges, validate the API where useful, document the defect clearly and verify the fix.</p><a className="magnetic" href="#qa-lab">SEE QA LAB <ArrowUpRight /></a></div><div className="case-grid" data-reveal><div><span>01</span><strong>UNDERSTAND</strong><p>Requirements, acceptance criteria and risk.</p></div><div><span>02</span><strong>EXPLORE</strong><p>Happy paths, edge cases and unexpected behaviour.</p></div><div><span>03</span><strong>REPORT</strong><p>Evidence, reproduction steps and impact.</p></div><div><span>04</span><strong>VERIFY</strong><p>Retest the fix and protect it with regression thinking.</p></div></div></section>
 
-      <section id="qa-lab" className="lab-section dark-section"><div className="section-kicker" data-reveal>QA LAB / EVIDENCE OVER ASSUMPTIONS</div><div className="lab-grid"><div data-reveal><h2>TEST.<br /><em>BREAK.</em><br />VERIFY.</h2></div><div data-reveal><p>My QA Lab turns learning into visible evidence: test scenarios, API collections, bug reports, regression checks and small automation experiments.</p><div className="lab-terminal"><span>qa-workflow</span><p>01&nbsp; define → test requirements</p><p>02&nbsp; explore → probe edge cases</p><p>03&nbsp; report → reproduce defects</p><p>04&nbsp; verify → regress the fix</p><i>QUALITY GATE / READY TO TEST</i></div></div></div></section>
+      <section id="qa-lab" className="dark-section lab-section">
+        <div className="section-kicker" data-reveal>TESTING, MADE VISIBLE</div><div className="section-title-row" data-reveal><h2>QA LAB</h2><span>02</span></div>
+        <div className="lab-grid"><div data-reveal><h2>TEST.<br /><em>BREAK.</em><br />REPORT.</h2></div><div data-reveal><p>I use the lab as a space to show the thinking behind a QA workflow — not just the final result.</p><div className="lab-terminal"><div>01&nbsp; <b>→</b> OPEN FLOW</div><div>02&nbsp; <b>→</b> CHANGE INPUT</div><div>03&nbsp; <b>→</b> WATCH FAILURE</div><div>04&nbsp; <b>→</b> REPORT CLEARLY</div></div></div></div>
+      </section>
 
-      <section className="quote-section"><p data-reveal>LET'S BUILD A <em>RELIABLE</em><br />DIGITAL EXPERIENCE <span>TOGETHER.</span></p></section>
+      <section id="quote" className="quote-section"><div className="quote-mark">“</div><blockquote data-reveal>GOOD QA IS NOT ABOUT FINDING MORE BUGS.<br /><em>IT'S ABOUT FINDING THE RIGHT RISKS.</em></blockquote><div className="quote-credit">— MOHAMMED KAIF QURESHI / QA ENGINEER</div></section>
 
-      <section id="contact" className="contact-section dark-section"><div className="section-kicker" data-reveal>YOU DREAM IT / I TEST IT</div><h2 data-reveal>CONTACT</h2><p className="contact-intro" data-reveal>GOT A QUESTION, A PROJECT IDEA OR A QA OPPORTUNITY? I'D LOVE TO HEAR FROM YOU AND DISCUSS FURTHER.</p><div className="contact-links" data-reveal><a href={`mailto:${SITE.email}`}><span>E-MAIL</span>{SITE.email}<ArrowUpRight /></a><a href={SITE.links.linkedin} target="_blank" rel="noreferrer"><span>LINKEDIN</span>PROFILE<Linkedin /></a><a href={SITE.links.github} target="_blank" rel="noreferrer"><span>GITHUB</span>CODE & PROJECTS<Github /></a></div></section>
+      <section id="contact" className="contact-section dark-section"><div className="section-kicker" data-reveal>LET'S TALK / BUILD WITH INTENT</div><h2 data-reveal>CONTACT</h2><div className="contact-grid" data-reveal><p>Have a product that needs a careful QA pass or a team looking for someone who can think like a builder and tester?</p><div className="contact-links"><a className="magnetic" href={`mailto:${SITE.email}`}>EMAIL <ArrowUpRight /></a><a className="magnetic" href={SITE.github} target="_blank" rel="noreferrer"><Github /> GITHUB <ArrowUpRight /></a><a className="magnetic" href={SITE.linkedin} target="_blank" rel="noreferrer"><Linkedin /> LINKEDIN <ArrowUpRight /></a></div></div></section>
     </main>
-    <footer className="editorial-footer"><span>© {new Date().getFullYear()} {SITE.name}</span><span>QUALITY / SOFTWARE / PEOPLE</span><a href="#home">BACK TO TOP ↑</a></footer>
+    <footer className="editorial-footer"><div><strong>MKQ</strong><span>QUALITY / 2026</span></div><span>DESIGNED, BUILT & TESTED WITH INTENT.</span></footer>
     <Analytics />
   </div>;
 }
