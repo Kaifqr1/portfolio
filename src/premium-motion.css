@@ -22,6 +22,34 @@
 .hero-line:nth-of-type(3) .hero-char:nth-child(1){transition-delay:.15s}.hero-line:nth-of-type(3) .hero-char:nth-child(2){transition-delay:.18s}.hero-line:nth-of-type(3) .hero-char:nth-child(3){transition-delay:.21s}.hero-line:nth-of-type(3) .hero-char:nth-child(4){transition-delay:.24s}.hero-line:nth-of-type(3) .hero-char:nth-child(5){transition-delay:.27s}.hero-line:nth-of-type(3) .hero-char:nth-child(6){transition-delay:.30s}.hero-line:nth-of-type(3) .hero-char:nth-child(7){transition-delay:.33s}.hero-line:nth-of-type(2) .hero-char{transition-delay:.25s}
 .hero-copy a,.case-copy a,.contact-links a,.menu-button{position:relative}.hero-copy a:after,.case-copy a:after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:1px;background:#d8ff54;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--premium-ease)}.hero-copy a:hover:after,.case-copy a:hover:after{transform:scaleX(1);transform-origin:left}
 
+/* Editorial nav motion: restrained, fast and theme-matched. */
+.menu-button{overflow:hidden;isolation:isolate;border-color:rgba(0,0,0,.26);transition:background .35s var(--premium-ease),color .35s var(--premium-ease),border-color .35s var(--premium-ease),transform .45s var(--premium-ease),box-shadow .35s var(--premium-ease)}
+.menu-button:before{content:'';position:absolute;inset:0;background:#d8ff54;transform:scaleX(0);transform-origin:right;transition:transform .45s var(--premium-ease);z-index:-1}
+.menu-button:hover{background:transparent;color:#090909;border-color:#090909;transform:translateY(-2px) rotate(0deg);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.menu-button:hover:before{transform:scaleX(1);transform-origin:left}
+.menu-button svg{position:relative;z-index:2;transition:transform .45s var(--premium-ease)}
+.menu-button:hover svg{transform:scale(.92)}
+.menu-button .lucide-menu{display:none}
+.menu-button .lucide-x{display:block}
+.menu-button:not(:has(.lucide-x)) .lucide-x{display:none}
+.menu-button:not(:has(.lucide-x)):before{z-index:0}
+.menu-button:not(:has(.lucide-x)):after{content:'';position:absolute;left:11px;right:11px;top:13px;height:2px;background:currentColor;border-radius:99px;box-shadow:0 7px 0 currentColor,0 14px 0 currentColor;z-index:1;transform:scaleX(.86);transform-origin:center;transition:transform .4s var(--premium-ease),box-shadow .4s var(--premium-ease)}
+.menu-button:not(:has(.lucide-x)):hover:after{transform:scaleX(1)}
+.menu-button:has(.lucide-x):before{transform:scaleX(0)}
+.menu-button:has(.lucide-x) .lucide-x{transition:transform .45s var(--premium-ease)}
+.menu-button:has(.lucide-x):hover .lucide-x{transform:rotate(90deg) scale(.94)}
+
+.menu-panel{border:1px solid rgba(255,255,255,.1);transform-origin:top right;animation:menuIn .45s var(--premium-ease)}
+.menu-panel a{position:relative;overflow:hidden;transition:padding-left .4s var(--premium-ease),color .3s ease,background .3s ease}
+.menu-panel a:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#d8ff54;transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--premium-ease)}
+.menu-panel a:after{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:rgba(216,255,84,.45);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--premium-ease)}
+.menu-panel a:hover{padding-left:14px;background:rgba(216,255,84,.045)}
+.menu-panel a:hover:before{transform:scaleY(1)}
+.menu-panel a:hover:after{transform:scaleX(1);transform-origin:left}
+.menu-panel a svg{transition:transform .4s var(--premium-ease),color .3s ease}
+.menu-panel a:hover svg{transform:translate(4px,-4px);color:#d8ff54}
+.menu-panel a span{transition:color .3s ease,opacity .3s ease}.menu-panel a:hover span{color:#d8ff54;opacity:.85}
+
 /* 3D card effects are desktop-only. */
 @media (hover:hover) and (pointer:fine){
   .project-card{transform:perspective(1400px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg)) translateZ(0);transform-style:preserve-3d}
@@ -34,6 +62,7 @@
 @media(max-width:800px){
   .editorial-hero{padding-left:18px;padding-right:18px}.hero-name{max-width:100%}.hero-name h1{font-size:clamp(3.1rem,16vw,6.2rem);line-height:.86;letter-spacing:-.07em}.hero-copy{width:min(100%,360px);margin-left:auto}.hero-bottom{padding-bottom:2px}
   .hero-stage{opacity:.55}.hero-grid-depth{width:120vw;height:120vw;right:-55vw;top:18vh}.hero-orb-small{right:9%;top:33%;width:78px;animation-duration:12s}.project-card,.project-card:hover{transform:none!important}.section-kicker:before{animation-duration:4.5s}
+  .menu-button{width:44px;height:44px}.menu-button:not(:has(.lucide-x)):after{left:11px;right:11px}
 }
 @media (hover:none), (pointer:coarse){.hero-orb-small{animation:none}.hero-grid-depth{opacity:.65}.section-kicker:before{animation:none}}
-@media(prefers-reduced-motion:reduce){.hero-stage,.hero-orb-small,.section-kicker:before{animation:none!important}.site-loader{transition:none}.hero-char{transform:none!important;opacity:1!important;transition:none!important}.project-card,.project-card:hover{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-stage,.hero-orb-small,.section-kicker:before{animation:none!important}.site-loader{transition:none}.hero-char{transform:none!important;opacity:1!important;transition:none!important}.project-card,.project-card:hover{transform:none!important}.menu-button,.menu-button:before,.menu-button:after,.menu-button svg,.menu-panel a,.menu-panel a:before,.menu-panel a:after,.menu-panel a svg{transition:none!important}.menu-panel a:hover{padding-left:4px}}
