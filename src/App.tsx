@@ -137,7 +137,7 @@ export default function App() {
     <div className={`site-loader${loading ? '' : ' is-done'}`} aria-hidden={!loading}>
       <div className="loader-inner">
         <div className="loader-top"><span>MKQ / 2026</span><span>{Math.round(loadProgress * 100)}%</span></div>
-        <h1 className="loader-name">MOHAMMED<br />KAIF QU.</h1>
+        <h1 className="loader-name">MOHAMMED<br />KAIF QURESHI</h1>
         <div className="loader-bar"><i style={{ '--loader-progress': loadProgress } as React.CSSProperties} /></div>
       </div>
     </div>
