@@ -14,14 +14,15 @@ const services = [
   ['02', 'API Testing', 'Request validation, status codes, payload checks, negative cases and Postman workflows.'],
   ['03', 'Exploratory Testing', 'Structured testing that pushes real user flows and edge cases beyond happy paths.'],
   ['04', 'Bug Reporting', 'Clear reproduction steps, expected vs actual results, severity and evidence developers can act on.'],
-  ['05', 'Selenium', 'Practical browser automation skills focused on stable, maintainable test flows.'],
+  ['05', 'Core Java', 'Core Java fundamentals for test automation, object-oriented programming and problem solving.'],
+  ['06', 'Selenium', 'Practical browser automation skills focused on stable, maintainable test flows.'],
 ];
 
 const projects = [
   { number: '01', title: 'QRServe', type: 'PRODUCT / QA CASE STUDY', description: 'A no-app digital menu platform for independent restaurants — from owner setup to live QR menu journeys.', tags: ['Web App', 'CRUD', 'QR', 'QA'], accent: 'lime', href: 'https://qr-serve-three.vercel.app/' },
   { number: '02', title: 'GNG — Grill & Glow', type: 'RESTAURANT WEB EXPERIENCE', description: 'A premium restaurant experience with responsive UI, branded QR access, analytics and motion-focused presentation.', tags: ['React', 'Vercel', 'Analytics', 'UX'], accent: 'orange', href: 'https://bnb-mumbai.vercel.app/' },
   { number: '03', title: 'Code Roast Smell', type: 'DEVELOPER TOOL', description: 'A web tool for inspecting code quality signals and turning technical findings into useful feedback.', tags: ['React', 'API', 'GitHub', 'Testing'], accent: 'blue', href: 'https://code-roast-smell-code-roast.vercel.app/' },
-  { number: '04', title: 'ShopCraft', type: 'E-COMMERCE WEB APP', description: 'A practical shopping experience concept focused on product discovery, browsing flows and a clean customer journey.', tags: ['Web App', 'E-Commerce', 'UX', 'Testing'], accent: 'purple', href: '#contact' },
+  { number: '04', title: 'Kaixy', type: 'E-COMMERCE WEB APP', description: 'A modern shopping experience focused on product discovery, browsing flows and a polished customer journey.', tags: ['React', 'E-Commerce', 'UX', 'Testing'], accent: 'purple', href: 'https://kaixy.vercel.app/' },
 ];
 
 function useReveal() {
@@ -60,7 +61,7 @@ function useScrollMotion() {
 }
 
 function VisualMark({ accent }: { accent: string }) {
-  const title = accent === 'orange' ? 'GNG' : accent === 'red' ? 'LIFEBLOOD' : accent === 'blue' ? 'CODE / ROAST' : accent === 'purple' ? 'SHOPCRAFT' : 'QRSERVE';
+  const title = accent === 'orange' ? 'GNG' : accent === 'red' ? 'LIFEBLOOD' : accent === 'blue' ? 'CODE / ROAST' : accent === 'purple' ? 'KAIXY' : 'QRSERVE';
   return <div className={`project-visual project-visual-${accent}`} aria-hidden="true">
     <div className="visual-noise" /><div className="visual-window"><div className="visual-window-bar"><i /><i /><i /></div>
       <div className="visual-window-content"><span>QUALITY / DIGITAL</span><strong>{title}</strong><div className="visual-lines"><i /><i /><i /><i /></div></div>
