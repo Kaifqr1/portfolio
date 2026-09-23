@@ -32,8 +32,8 @@ jobs:
               s = s.replace(old_service, new_service)
               s = s.replace('<span>05</span></div></div>', '<span>06</span></div></div>', 1)
 
-          # Keep project count accurate.
-          s = s.replace('<h2>PROJECTS</h2><span>04</span>', '<h2>PROJECTS</h2><span>04</span>')
+          # Fix the loader name: show the complete name instead of the truncated surname.
+          s = s.replace('MOHAMMED<br />KAIF QU.', 'MOHAMMED<br />KAIF QURESHI')
 
           # Make the visual mark understand Kaixy while preserving the existing purple styling.
           s = s.replace(": accent === 'purple' ? 'SHOPCRAFT' : 'QRSERVE'", ": accent === 'purple' ? 'KAIXY' : 'QRSERVE'")
@@ -47,5 +47,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/App.tsx
           git diff --cached --quiet && exit 0
-          git commit -m "Update portfolio skills and replace ShopCraft with Kaixy"
+          git commit -m "Fix loader name to Mohammed Kaif Qureshi"
           git push
